@@ -1,7 +1,11 @@
 {
-	"managerDockerPush": {		
-		"develop": {
+	"push": {		
+		"test": {
+			"distribute": {
+				"tags": "test"
+			},
 			"deploy": {
+				"managerTag": "latest",
 				"environment": "staging"
 			}
 		}
