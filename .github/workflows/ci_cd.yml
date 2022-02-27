@@ -1,5 +1,4 @@
 jobs:
-  name: CI/CD
   call-main-repo:
     uses: openremote/openremote/.github/workflows/ci_cd.yml@feature/workflows
     with:
