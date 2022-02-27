@@ -1,5 +1,4 @@
 # This just references the CI/CD workflow in the main OpenRemote repo
-
 name: CI/CD
 
 on:
@@ -41,10 +40,9 @@ on:
       COMMIT:
         description: 'Repo branch or commit SHA to use'
 
-  schedule:
-    # Put a bit of randomness in here for each repo
-    - cron: '*/17 * * * *'
-  
+# Un-comment to monitor manager docker image tags for changes and trigger a redeploy
+#   schedule:
+#     - cron: '*/17 * * * *'
       
 jobs:
   call-main-repo:
