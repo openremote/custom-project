@@ -42,7 +42,8 @@ on:
         description: 'Repo branch or commit SHA to use'
 
   schedule:
-    - cron: '15 * * * *'
+    # Put a bit of randomness in here for each repo
+    - cron: '*/17 * * * *'
   
       
 jobs:
