@@ -1,0 +1,10 @@
+name: CI/CD
+
+jobs:
+  name: CI/CD
+  call-main-repo:
+    uses: openremote/openremote/.github/workflows/ci_cd.yml@feature/workflows
+    with:
+      INPUTS: ${{ toJSON(github.event.inputs) }}
+    secrets:
+      SECRETS: ${{ toJSON(secrets) }}
