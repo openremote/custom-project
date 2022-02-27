@@ -1,3 +1,5 @@
+# This just references the CI/CD workflow in the main OpenRemote repo
+
 name: CI/CD
 
 on:
