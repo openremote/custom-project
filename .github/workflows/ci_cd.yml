@@ -43,7 +43,7 @@ on:
 
   schedule:
     # Put a bit of randomness in here for each repo
-    - cron: '*/5 * * * *'
+    - cron: '*/17 * * * *'
   
       
 jobs:
