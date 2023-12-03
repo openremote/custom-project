@@ -1,0 +1,10 @@
+{
+	"push": {
+		"main": {
+			"deploy": {
+				"managerTag": "develop",
+				"environment": "staging"
+			}
+		}
+	}
+}

@@ -1,0 +1,113 @@
+# ---------------------------------------------------------------------------------------------
+# Provisions an EFS using the specified VPC and subnets; creates a security group called
+# `or-map`; but doesn't pre-configure ingress rules on this security group.
+# ---------------------------------------------------------------------------------------------
+AWSTemplateFormatVersion: 2010-09-09
+Description: Hosts EFS
+
+Parameters:
+  VpcId:
+    Type: String
+    Description: The VPC ID
+
+  SubnetID1:
+    Type: AWS::EC2::Subnet::Id
+    Description: Mount target 1 subnet ID
+
+  SubnetID2:
+    Type: AWS::EC2::Subnet::Id
+    Description: Mount target 2 subnet ID
+
+  SubnetID3:
+    Type: AWS::EC2::Subnet::Id
+    Description: Mount target 3 subnet ID
+
+Conditions:
+  CreateTarget1: !Not [!Equals [!Ref SubnetID1, ""]]
+  CreateTarget2: !Not [!Equals [!Ref SubnetID2, ""]]
+  CreateTarget3: !Not [!Equals [!Ref SubnetID3, ""]]
+
+Resources:
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "OR Map EFS access"
+      VpcId: !Ref VpcId
+      Tags:
+        - Key: Name
+          Value: or-map
+
+  FileSystem:
+    Type: 'AWS::EFS::FileSystem'
+    Properties:
+      BackupPolicy:
+        Status: DISABLED
+      PerformanceMode: generalPurpose
+      Encrypted: false
+      LifecyclePolicies:
+        - TransitionToIA: AFTER_30_DAYS
+      FileSystemTags:
+        - Key: Name
+          Value: or-map-efs
+#      FileSystemPolicy:
+#        Version: "2012-10-17"
+#        Statement:
+#          - Effect: "Allow"
+#            Action:
+#              - "elasticfilesystem:ClientMount"
+#            Principal:
+#              AWS: '*'
+#            Condition:
+#              StringEquals:
+#                'aws:PrincipalOrgID': o-dhb7rpaban
+
+
+
+  MountTargetResource1:
+    Type: AWS::EFS::MountTarget
+    Condition: CreateTarget1
+    Properties:
+      FileSystemId: !Ref FileSystem
+      SubnetId: !Ref SubnetID1
+      SecurityGroups:
+        - !Ref SecurityGroup
+
+  MountTargetResource2:
+    Type: AWS::EFS::MountTarget
+    Condition: CreateTarget2
+    Properties:
+      FileSystemId: !Ref FileSystem
+      SubnetId: !Ref SubnetID2
+      SecurityGroups:
+        - !Ref SecurityGroup
+
+  MountTargetResource3:
+    Type: AWS::EFS::MountTarget
+    Condition: CreateTarget3
+    Properties:
+      FileSystemId: !Ref FileSystem
+      SubnetId: !Ref SubnetID3
+      SecurityGroups:
+        - !Ref SecurityGroup
+
+#  SecurityGroupIngressIP4:
+#    Condition: CreateIPV4Ingress
+#    Type: AWS::EC2::SecurityGroupIngress
+#    Properties:
+#      CidrIp: !Ref VPCIP4CIDR
+#      GroupId: !Ref SecurityGroupID
+#      Description: "EFS for VPC"
+#      FromPort: 2049
+#      IpProtocol: "tcp"
+#      ToPort: 2049
+#
+#  SecurityGroupIngressIP6:
+#    Condition: CreateIPV6Ingress
+#    Type: AWS::EC2::SecurityGroupIngress
+#    Properties:
+#      CidrIpv6: !Ref VPCIP6CIDR
+#      GroupId: !Ref SecurityGroupID
+#      Description: "EFS for VPC"
+#      FromPort: 2049
+#      IpProtocol: "tcp"
+#      ToPort: 2049
