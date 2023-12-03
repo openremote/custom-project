@@ -37,7 +37,7 @@ on:
 jobs:
   call-main-repo:
     name: CI/CD
-    uses: openremote/openremote/.github/workflows/ci_cd.yml@master
+    uses: wborn/openremote/.github/workflows/ci_cd.yml@master
     with:
       INPUTS: ${{ toJSON(github.event.inputs) }}
     secrets:
