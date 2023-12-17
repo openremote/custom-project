@@ -6,7 +6,13 @@ dependencies {
 
 task license {
     doLast {
-        def toConcatenate = files("${project(":openremote").projectDir}/LICENSE.txt", "${rootDir}/LICENSE.txt")
+        def licenseFiles = new ArrayList<>()
+        if (findProject(":openremote")) {
+            licenseFiles.add("${project(":openremote").projectDir}/LICENSE.txt")
+        }
+        licenseFiles.add("${rootDir}/LICENSE.txt")
+
+        def toConcatenate = files(licenseFiles.toArray())
         def outputFileName = "${buildDir}/image/manager/app/LICENSE.txt"
         def output = new File(outputFileName)
         if (output.exists()) {

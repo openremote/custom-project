@@ -1,8 +1,10 @@
 
 allprojects {
     // Apply common project setup but exclude submodule, it has its own build.gradle
-    if (!path.startsWith(":openremote")) {
+    if (findProject(":openremote") && !path.startsWith(":openremote")) {
         apply from: "${project(":openremote").projectDir}/project.gradle"
+    } else if (!findProject(":openremote")) {
+        apply from: "${project.rootDir}/custom-project.gradle"
     }
 }
 
