@@ -2,8 +2,7 @@ apply plugin: "java-library"
 
 dependencies {
     api resolveDependency(":container")
-    //api resolveDependency(":manager")
-    api resolveProject(":manager")
+    api resolveDependency(":manager")
     api project(":agent")
     api project(":model")
 }
