@@ -1,0 +1,45 @@
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "cz.habarta.typescript-generator:typescript-generator-gradle-plugin:$typescriptGeneratorVersion"
+    }
+}
+
+plugins {
+    id 'groovy'
+    id 'cz.habarta.typescript-generator'
+}
+
+dependencies {
+    compileOnly resolveDependency(":model-util")
+    implementation findProject(":model")
+    implementation findProject(":agent")
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
+    implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion"
+    implementation "cz.habarta.typescript-generator:typescript-generator-core:$typescriptGeneratorVersion"
+}
+
+generateTypeScript createTSGeneratorConfigForModel("src/model.ts", findProject(":model"))
+
+build.dependsOn generateTypeScript, npmBuild
+npmBuild.dependsOn generateTypeScript
+
+clean {
+    doLast {
+        def dir = new File("${projectDir}/dist")
+        dir.deleteDir()
+    }
+}
+
+task prepareUi() {
+    dependsOn clean, npmPrepare
+}
+
+task publishUi() {
+    dependsOn clean, npmPublish
+}

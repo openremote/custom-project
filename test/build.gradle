@@ -12,7 +12,8 @@ dependencies {
     api project(":manager")
     api project(":model")
     api project(":agent")
-    testImplementation(testFixtures(resolveDependency(":test")))
+    testImplementation(resolveDependency(":test"))
+//    testImplementation(testFixtures())
 }
 
 tasks.withType(Test) {
