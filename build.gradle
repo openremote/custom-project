@@ -4,7 +4,7 @@ allprojects {
     if (findProject(":openremote") && !path.startsWith(":openremote")) {
         apply from: "${project(":openremote").projectDir}/project.gradle"
     } else if (!findProject(":openremote")) {
-        apply from: "${project.rootDir}/custom-project.gradle"
+        apply from: "${project.rootDir}/project.gradle"
     }
 }
 

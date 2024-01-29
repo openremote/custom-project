@@ -281,11 +281,13 @@ def createTSGeneratorConfig(boolean outputAPIClient, String outputFileName, Proj
         }
     }.toList()
 
+    def baseClassPattern = outputAPIClient
+        ? customProjectsToScan.length == 0 ? [ "org.openremote.model.**Resource" ] : []
+        : [ "org.openremote.model.**" ]
+
     return {
         jsonLibrary = "jackson2"
-        classPatterns = [
-                (outputAPIClient ? "org.openremote.model.**Resource" : "org.openremote.model.**")
-        ] + classPatternGlobs
+        classPatterns = baseClassPattern + classPatternGlobs
         customTypeNamingFunction = "function(name, simpleName) { if (name.indexOf(\"\$\") > 0) return name.substr(name.lastIndexOf(\".\")+1).replace(\"\$\",\"\"); }"
         excludeClassPatterns = [
                 "org.openremote.model.event.shared.*Filter**",
