@@ -233,7 +233,7 @@ def createTSGeneratorConfigForClient(String outputFileName, Project...customProj
                 extensions = [
                         "CustomExtension",
                         "JsonSerializeExtension",
-                        "AggregatedApiClient",
+                        "CustomAggregatedApiClient",
                         "cz.habarta.typescript.generator.ext.AxiosClientExtension"
                 ]
                 customTypeMappings = [
@@ -249,7 +249,7 @@ def createTSGeneratorConfigForClient(String outputFileName, Project...customProj
                 ]
                 moduleDependencies = [
                         cz.habarta.typescript.generator.ModuleDependency.module(
-                                "@openremote/model",
+                                "model",
                                 "Model",
                                 new File("$buildDir/typescript-generator-info.json"),
                                 (String) null,
