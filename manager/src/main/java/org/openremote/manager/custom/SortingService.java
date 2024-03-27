@@ -35,6 +35,9 @@ import java.util.stream.Collectors;
 public class SortingService implements ContainerService {
 
     protected AssetStorageService assetStorageService;
+    public void setAssetStorageService(AssetStorageService assetStorageService) {
+        this.assetStorageService = assetStorageService;
+    }
     @Override
     public void init(Container container) throws Exception {
         this.assetStorageService = container.getService(AssetStorageService.class);

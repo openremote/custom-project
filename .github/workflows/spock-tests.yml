@@ -1,0 +1,25 @@
+name: Run Spock Tests
+
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - '.github/**'
+      - '**/*.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build and test with Gradle
+        run: ./gradlew test --info
