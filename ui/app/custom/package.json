@@ -18,7 +18,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@openremote/manager": "^1.0.4",
+    "@openremote/manager": "^1.2.0-snapshot",
     "model": "^1.0.0",
     "rest": "^1.0.0"
   },
@@ -30,7 +30,7 @@
     "@babel/plugin-transform-runtime": "^7.16.4",
     "@babel/preset-env": "^7.16.4",
     "@babel/runtime": "^7.16.3",
-    "@openremote/util": "^1.0.4",
+    "@openremote/util": "^1.2.0-snapshot",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
     "babel-loader": "^8.2.3",

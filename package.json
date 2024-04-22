@@ -8,6 +8,6 @@
     "ui/demo/*"
   ],
   "devDependencies": {
-    "@openremote/util": "^1.0.4"
+    "@openremote/util": "^1.2.0-snapshot"
   }
 }

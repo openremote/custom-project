@@ -21,7 +21,7 @@
   "author": "OpenRemote",
   "license": "AGPL-3.0-or-later",
   "devDependencies": {
-    "@openremote/util": "^1.0.4"
+    "@openremote/util": "^1.2.0-snapshot"
   },
   "publishConfig": {
     "access": "public"
