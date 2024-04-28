@@ -15,7 +15,7 @@ on:
 
   # When a release is published
   release:
-    types: [published]    
+    types: [published]
 
   # Manual trigger
   workflow_dispatch:
@@ -37,7 +37,7 @@ on:
 jobs:
   call-main-repo:
     name: CI/CD
-    uses: wborn/openremote/.github/workflows/ci_cd.yml@master
+    uses: openremote/openremote/.github/workflows/ci_cd.yml@master
     with:
       INPUTS: ${{ toJSON(github.event.inputs) }}
     secrets:
