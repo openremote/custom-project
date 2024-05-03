@@ -227,7 +227,7 @@ def createTSGeneratorConfigForModel(String outputFileName, Project...customProje
             }
     return config
 }
-def createTSGeneratorConfigForClient(String outputFileName, Project...customProjectsToScan) {
+def createTSGeneratorConfigForClient(String outputFileName, File modelInfoJson, Project...customProjectsToScan) {
     def config = createTSGeneratorConfig(true, outputFileName, customProjectsToScan) <<
             {
                 extensions = [
@@ -251,7 +251,7 @@ def createTSGeneratorConfigForClient(String outputFileName, Project...customProj
                         cz.habarta.typescript.generator.ModuleDependency.module(
                                 "model",
                                 "Model",
-                                new File("$buildDir/typescript-generator-info.json"),
+                                modelInfoJson,
                                 (String) null,
                                 (String) null
                         )

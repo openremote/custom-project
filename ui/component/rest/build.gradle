@@ -21,12 +21,8 @@ dependencies {
     implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion"
 }
 
-// This seems hacky but it is the only way to get the closure from the method call
-project.task(Collections.singletonMap(Task.TASK_TYPE, cz.habarta.typescript.generator.gradle.GenerateTask), "generateTypescriptModelInfo")
-generateTypescriptModelInfo createTSGeneratorConfigForModel("$buildDir/model.ts", findProject(":model"))
-
-generateTypeScript createTSGeneratorConfigForClient("src/restclient.ts", findProject(":model"))
-generateTypeScript.dependsOn(generateTypescriptModelInfo)
+generateTypeScript createTSGeneratorConfigForClient("src/restclient.ts", new File("${project(":ui:component:model").projectDir}/src/typescript-generator-info.json"), project(":model"))
+generateTypeScript.dependsOn resolveTask(":ui:component:model:generateTypeScript")
 
 clean {
     doLast {
