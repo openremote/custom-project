@@ -1,11 +1,18 @@
-import rest from "@openremote/rest";
+import {ApiClient} from "./restclient";
+
 
 
 export class RestApi {
 
+    protected _apiClient: ApiClient;
+
+    constructor(apiClient: ApiClient) {
+        this._apiClient = apiClient;
+    }
+
     get api() {
-        return rest.api;
+        return this._apiClient;
     }
 }
 
-export default new RestApi();
+export default new RestApi(new ApiClient());
