@@ -2346,7 +2346,7 @@ __metadata:
     "@babel/runtime": "npm:^7.16.3"
     "@openremote/custom-model": "workspace:*"
     "@openremote/custom-rest": "workspace:*"
-    "@openremote/manager": "npm:^1.2.0-snapshot.20240512160637"
+    "@openremote/manager": "npm:^1.2.0-snapshot"
     "@openremote/util": "npm:^1.2.0-snapshot"
     "@typescript-eslint/eslint-plugin": "npm:^5.9.0"
     "@typescript-eslint/parser": "npm:^5.9.0"
@@ -2378,7 +2378,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@openremote/manager@npm:^1.2.0-snapshot.20240512160637":
+"@openremote/manager@npm:^1.2.0-snapshot":
   version: 1.2.0-snapshot.20240512162641
   resolution: "@openremote/manager@npm:1.2.0-snapshot.20240512162641"
   dependencies:
