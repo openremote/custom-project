@@ -2312,6 +2312,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@openremote/custom-model@workspace:*, @openremote/custom-model@workspace:ui/component/model":
+  version: 0.0.0-use.local
+  resolution: "@openremote/custom-model@workspace:ui/component/model"
+  dependencies:
+    "@openremote/util": "npm:^1.2.0-snapshot"
+  languageName: unknown
+  linkType: soft
+
+"@openremote/custom-rest@workspace:*, @openremote/custom-rest@workspace:ui/component/rest":
+  version: 0.0.0-use.local
+  resolution: "@openremote/custom-rest@workspace:ui/component/rest"
+  dependencies:
+    "@openremote/model": "npm:^1.2.0-snapshot"
+    "@openremote/rest": "npm:^1.2.0-snapshot"
+    "@openremote/util": "npm:^1.2.0-snapshot"
+    "@types/qs": "npm:^6.9.7"
+    axios: "npm:0.24.0"
+    qs: "npm:^6.8.0"
+  languageName: unknown
+  linkType: soft
+
 "@openremote/custom@workspace:ui/app/custom":
   version: 0.0.0-use.local
   resolution: "@openremote/custom@workspace:ui/app/custom"
@@ -2323,7 +2344,9 @@ __metadata:
     "@babel/plugin-transform-runtime": "npm:^7.16.4"
     "@babel/preset-env": "npm:^7.16.4"
     "@babel/runtime": "npm:^7.16.3"
-    "@openremote/manager": "npm:^1.2.0-snapshot"
+    "@openremote/custom-model": "workspace:*"
+    "@openremote/custom-rest": "workspace:*"
+    "@openremote/manager": "npm:^1.2.0-snapshot.20240512160637"
     "@openremote/util": "npm:^1.2.0-snapshot"
     "@typescript-eslint/eslint-plugin": "npm:^5.9.0"
     "@typescript-eslint/parser": "npm:^5.9.0"
@@ -2342,10 +2365,8 @@ __metadata:
     fork-ts-checker-notifier-webpack-plugin: "npm:^4.0.0"
     fork-ts-checker-webpack-plugin: "npm:^6.5.0"
     html-webpack-plugin: "npm:^5.5.0"
-    model: "npm:^1.0.0"
     prettier: "npm:^2.5.1"
     querystring-es3: "npm:^0.2.1"
-    rest: "npm:^1.0.0"
     shx: "npm:^0.3.3"
     source-map-loader: "npm:^3.0.0"
     style-loader: "npm:^3.3.1"
@@ -2357,7 +2378,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@openremote/manager@npm:^1.2.0-snapshot":
+"@openremote/manager@npm:^1.2.0-snapshot.20240512160637":
   version: 1.2.0-snapshot.20240512162641
   resolution: "@openremote/manager@npm:1.2.0-snapshot.20240512162641"
   dependencies:
@@ -7246,14 +7267,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"model@npm:^1.0.0, model@workspace:ui/component/model":
-  version: 0.0.0-use.local
-  resolution: "model@workspace:ui/component/model"
-  dependencies:
-    "@openremote/util": "npm:^1.2.0-snapshot"
-  languageName: unknown
-  linkType: soft
-
 "moment@npm:2.29.4":
   version: 2.29.4
   resolution: "moment@npm:2.29.4"
@@ -8324,19 +8337,6 @@ __metadata:
   checksum: 10/f345cd37f56a2c0275e3fe062517c650bb673815d885e7507566df589375d165bbbf4bdb6aa95600a9bc55f4744b81f452b5a63f95b9f10a72787dba3c90890a
   languageName: node
   linkType: hard
-
-"rest@npm:^1.0.0, rest@workspace:ui/component/rest":
-  version: 0.0.0-use.local
-  resolution: "rest@workspace:ui/component/rest"
-  dependencies:
-    "@openremote/model": "npm:^1.2.0-snapshot"
-    "@openremote/rest": "npm:^1.2.0-snapshot"
-    "@openremote/util": "npm:^1.2.0-snapshot"
-    "@types/qs": "npm:^6.9.7"
-    axios: "npm:0.24.0"
-    qs: "npm:^6.8.0"
-  languageName: unknown
-  linkType: soft
 
 "retry@npm:^0.12.0":
   version: 0.12.0

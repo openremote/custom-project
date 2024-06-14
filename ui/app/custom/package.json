@@ -18,9 +18,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@openremote/manager": "^1.2.0-snapshot",
-    "model": "^1.0.0",
-    "rest": "^1.0.0"
+    "@openremote/custom-model": "workspace:*",
+    "@openremote/custom-rest": "workspace:*",
+    "@openremote/manager": "^1.2.0-snapshot"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

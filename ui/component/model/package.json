@@ -1,9 +1,10 @@
 {
-  "name": "model",
+  "name": "@openremote/custom-model",
   "version": "1.0.0",
   "description": "Model Types",
   "main": "dist/umd/index.bundle.js",
   "module": "lib/index.js",
+  "private": true,
   "exports": {
     ".": "./lib/index.js",
     "./*": "./lib/*.js"
@@ -24,6 +25,6 @@
     "@openremote/util": "^1.2.0-snapshot"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "restricted"
   }
 }

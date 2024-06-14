@@ -1,5 +1,5 @@
 {
-  "name": "rest",
+  "name": "@openremote/custom-rest",
   "version": "1.0.0",
   "description": "REST API",
   "main": "dist/umd/index.bundle.js",
@@ -30,5 +30,8 @@
   "devDependencies": {
     "@openremote/util": "^1.2.0-snapshot",
     "@types/qs": "^6.9.7"
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }
