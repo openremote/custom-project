@@ -1,5 +1,5 @@
 {
-  "name": "@openremote/custom-model",
+  "name": "model",
   "version": "1.0.0",
   "description": "Model Types",
   "main": "dist/umd/index.bundle.js",

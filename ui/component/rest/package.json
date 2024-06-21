@@ -1,5 +1,5 @@
 {
-  "name": "@openremote/custom-rest",
+  "name": "rest",
   "version": "1.0.0",
   "description": "REST API",
   "main": "dist/umd/index.bundle.js",
@@ -22,9 +22,9 @@
   "author": "OpenRemote",
   "license": "AGPL-3.0-or-later",
   "dependencies": {
-    "@openremote/model": "^1.2.0-snapshot",
     "@openremote/rest": "^1.2.0-snapshot",
     "axios": "0.24.0",
+    "model": "workspace:*",
     "qs": "^6.8.0"
   },
   "devDependencies": {

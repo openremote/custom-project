@@ -2,8 +2,8 @@ import {css, html, TemplateResult} from "lit";
 import {customElement} from "lit/decorators.js";
 import {AppStateKeyed, Page, PageProvider} from "@openremote/or-app";
 import {EnhancedStore} from "@reduxjs/toolkit";
-import {CustomData} from "@openremote/custom-model";
-import rest from "@openremote/custom-rest";
+import {CustomData} from "model";
+import rest from "rest";
 
 export function pageCustomProvider(store: EnhancedStore<AppStateKeyed>): PageProvider<AppStateKeyed> {
     return {
