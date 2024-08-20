@@ -116,39 +116,8 @@ if (project == rootProject) {
                     shortenCommandLine = MANIFEST
                     workingDirectory = projectDir.toString()
                 }
-                "Demo Setup"(Application) {
-                    moduleName = getProject().idea.module.name + ".openremote.setup.demo"
-                    envs = [
-                            OR_SETUP_TYPE: "demo"
-                    ]
-                }
-                "Demo Setup with Proxy"(Application) {
-                    moduleName = getProject().idea.module.name + ".openremote.setup.demo"
-                    envs = [
-                            OR_SETUP_TYPE: "demo",
-                            OR_WEBSERVER_LISTEN_HOST: "0.0.0.0",
-                            OR_SSL_PORT: "-1"
-                    ]
-                }
-                "Test Setup"(Application) {
-                    moduleName = getProject().idea.module.name + ".openremote.setup.integration"
-                }
-                "Test Setup with Proxy"(Application) {
-                    moduleName = getProject().idea.module.name + ".openremote.setup.integration"
-                    envs = [
-                            OR_WEBSERVER_LISTEN_HOST: "0.0.0.0",
-                            OR_SSL_PORT: "-1"
-                    ]
-                }
                 "Empty"(Application) {
                     moduleName = getProject().idea.module.name + ".openremote.manager.main"
-                }
-                "Empty with Proxy"(Application) {
-                    moduleName = getProject().idea.module.name + ".openremote.manager.main"
-                    envs = [
-                            OR_WEBSERVER_LISTEN_HOST: "0.0.0.0",
-                            OR_SSL_PORT: "-1"
-                    ]
                 }
             }
         }
