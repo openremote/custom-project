@@ -18,7 +18,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@openremote/manager": "1.2.0-snapshot.20240616202404",
+    "@openremote/manager": "^1.2.0-snapshot",
     "model": "workspace:*",
     "rest": "workspace:*"
   },
