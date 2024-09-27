@@ -1,8 +1,8 @@
 // Common configuration applied to all projects
 import java.nio.file.*
 import java.nio.file.attribute.*
-import java.util.Set
 import java.util.stream.Collectors
+import java.util.stream.Stream
 import java.util.stream.StreamSupport
 
 import static org.apache.tools.ant.taskdefs.condition.Os.FAMILY_WINDOWS
@@ -152,6 +152,7 @@ repositories {
     maven {
         url "https://pkgs.dev.azure.com/OpenRemote/OpenRemote/_packaging/OpenRemote/maven/v1"
     }
+    mavenLocal()
     maven {
         url "https://s01.oss.sonatype.org/content/repositories/snapshots"
     }
@@ -242,10 +243,10 @@ def createTSGeneratorConfig(boolean outputAPIClient, String outputFileName, Proj
                     srcPath = files[0]
                 }
             }
-            java.nio.file.Path packagePath = it.toPath().relativize(srcPath.toPath())
+            Path packagePath = it.toPath().relativize(srcPath.toPath())
             return StreamSupport
                     .stream(packagePath.spliterator(), false)
-                    .map(java.nio.file.Path::toString)
+                    .map(Path::toString)
                     .collect(Collectors.joining(".")) + (outputAPIClient ? ".**Resource" : ".**")
         }
     }.toList()
@@ -288,10 +289,6 @@ def createTSGeneratorConfig(boolean outputAPIClient, String outputFileName, Proj
     }
 }
 
-def resolveDependency(String path) {
-    "io.openremote:openremote-" + path.substring(1) + ":" + version
-}
-
 def resolveTask(String path) {
     tasks.getByPath(path)
 }
@@ -313,18 +310,22 @@ def getDeploymentJars(Project project = project) {
         return []
     }
 
-    return project.configurations.runtimeClasspath.resolvedConfiguration.resolvedArtifacts.findAll {
-        dep -> dep.name != "openremote-manager" }.collect {
-        println "CopyLibs Artifact: ${it.file.path}"
-        return it.file
-    }
+    def excludedDepNames = Stream.of("console_loader", "insights", "manager", "shared", "swagger")
+            .map(s ->  "openremote-" + s)
+            .collect(Collectors.toSet())
+
+    return project.configurations.runtimeClasspath.resolvedConfiguration.resolvedArtifacts
+            .findAll { !excludedDepNames.contains(it.name) }
+            .collect {
+                println "CopyLibs Artifact: ${it.file.path}"
+                return it.file
+            }
 }
 
 ext {
     resolveTask = this.&resolveTask
     getYarnInstallTask = this.&getYarnInstallTask
     getDeploymentJars = this.&getDeploymentJars
-    resolveDependency = this.&resolveDependency
     createTSGeneratorConfigForClient = this.&createTSGeneratorConfigForClient
     createTSGeneratorConfigForModel = this.&createTSGeneratorConfigForModel
 }
@@ -336,45 +337,45 @@ ext.npmCommand = {
 }
 
 // Add yarn tasks
-task yarnInstall(type: Exec){
+tasks.register('yarnInstall', Exec) {
     commandLine npmCommand("yarn"), "install"
 }
-task yarnInstallForce(type: Exec){
+tasks.register('yarnInstallForce', Exec) {
     commandLine npmCommand("yarn"), "install", "--force"
 }
 
-task npmClean(type: Exec){
+tasks.register('npmClean', Exec) {
     dependsOn getYarnInstallTask()
     commandLine npmCommand("yarn"), "run", "clean"
 }
-task npmBuild(type: Exec){
+tasks.register('npmBuild', Exec) {
     mustRunAfter npmClean
     dependsOn getYarnInstallTask()
     commandLine npmCommand("yarn"), "run", "build"
 }
-task npmTest(type: Exec){
+tasks.register('npmTest', Exec) {
     dependsOn getYarnInstallTask()
     commandLine npmCommand("yarn"), "run", "test"
 }
-task npmServe(type: Exec){
+tasks.register('npmServe', Exec) {
     dependsOn getYarnInstallTask()
     commandLine npmCommand("yarn"), "run", "serve"
 }
-task npmPrepare(type: Exec){
+tasks.register('npmPrepare', Exec) {
     dependsOn getYarnInstallTask()
     commandLine npmCommand("yarn"), "run", "prepublishOnly"
 }
-task npmPublish(type: Exec){
+tasks.register('npmPublish', Exec) {
     dependsOn getYarnInstallTask()
     commandLine npmCommand("yarn"), "publish"
 }
-task npmServeProduction(type: Exec) {
+tasks.register('npmServeProduction', Exec) {
     dependsOn getYarnInstallTask()
     commandLine npmCommand("yarn"), "run", "serveProduction"
 }
 
 // Add typescript tasks
-task tscWatch(type: Exec) {
+tasks.register('tscWatch', Exec) {
     commandLine npmCommand("npx"), "tsc", "-b", "--watch"
 }
 
@@ -396,7 +397,7 @@ plugins.withType(JavaPlugin).whenPluginAdded {
     }
 
     // Allow dependencyInsight checks across all projects
-    task allDependencyInsight(type: DependencyInsightReportTask) {}
+    tasks.register('allDependencyInsight', DependencyInsightReportTask) {}
 
     // JAR/ZIP base name is the fully qualified subproject name
     archivesBaseName = "${rootProject.name}${path.replaceAll(":", "-")}"

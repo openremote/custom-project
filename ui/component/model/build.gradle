@@ -2,7 +2,6 @@
 buildscript {
     repositories {
         mavenCentral()
-        jcenter()
     }
     dependencies {
         classpath "cz.habarta.typescript-generator:typescript-generator-gradle-plugin:$typescriptGeneratorVersion"
@@ -15,9 +14,9 @@ plugins {
 }
 
 dependencies {
-    compileOnly resolveDependency(":model-util")
-    implementation findProject(":model")
-    implementation findProject(":agent")
+    compileOnly "io.openremote:openremote-model-util:$openremoteVersion"
+    implementation project(":agent")
+    implementation project(":model")
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
     implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion"
@@ -36,10 +35,10 @@ clean {
     }
 }
 
-task prepareUi() {
+tasks.register('prepareUi') {
     dependsOn clean, npmPrepare
 }
 
-task publishUi() {
+tasks.register('publishUi') {
     dependsOn clean, npmPublish
 }
