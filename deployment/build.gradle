@@ -7,9 +7,6 @@ dependencies {
 tasks.register('license') {
     doLast {
         def licenseFiles = new ArrayList<>()
-        if (findProject(":openremote")) {
-            licenseFiles.add("${project(":openremote").projectDir}/LICENSE.txt")
-        }
         licenseFiles.add("${rootDir}/LICENSE.txt")
 
         def toConcatenate = files(licenseFiles.toArray())
