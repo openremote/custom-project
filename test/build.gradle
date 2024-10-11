@@ -13,7 +13,6 @@ dependencies {
     api project(":model")
     api project(":agent")
     testImplementation "io.openremote:openremote-test:$openremoteVersion"
-//    testImplementation(testFixtures())
 }
 
 tasks.withType(Test) {
