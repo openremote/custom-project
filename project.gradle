@@ -19,6 +19,9 @@ version = hasProperty("openremoteVersion") ? openremoteVersion : "0.0.0"
 configurations.all {
     resolutionStrategy {
 
+        // check for changing (i.e. SNAPSHOT) updates every build
+        cacheChangingModulesFor 0, 'seconds'
+
         //failOnVersionConflict()
 
         // This has been replaced with eclipse angus implementation
