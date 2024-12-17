@@ -155,10 +155,10 @@ repositories {
     maven {
         url "https://pkgs.dev.azure.com/OpenRemote/OpenRemote/_packaging/OpenRemote/maven/v1"
     }
-    mavenLocal()
     maven {
         url "https://s01.oss.sonatype.org/content/repositories/snapshots"
     }
+    mavenLocal()
 }
 
 // Eclipse needs help
