@@ -11,10 +11,6 @@ import static org.jetbrains.gradle.ext.ShortenCommandLine.MANIFEST
 import org.jetbrains.gradle.ext.Application
 import org.jetbrains.gradle.ext.JUnit
 
-// Configure versions in gradle.properties (putting a gradle.properties file
-// in a subproject only overrides root properties of same name for the actual
-// subproject, not for its children!)
-version = hasProperty("openremoteVersion") ? openremoteVersion : "0.0.0"
 
 configurations.all {
     resolutionStrategy {
