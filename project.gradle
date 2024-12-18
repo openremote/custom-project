@@ -313,12 +313,9 @@ def getDeploymentJars(Project project = project) {
         return []
     }
 
-    def excludedDepNames = Stream.of("console_loader", "insights", "manager", "shared", "swagger")
-            .map(s ->  "openremote-" + s)
-            .collect(Collectors.toSet())
-
+    // Dependencies already part of the manager are excluded so they do not appear on the classpath twice
     return project.configurations.runtimeClasspath.resolvedConfiguration.resolvedArtifacts
-            .findAll { !excludedDepNames.contains(it.name) }
+            .findAll { !it.file.path.contains(".gradle") && !it.file.path.contains(".m2") }
             .collect {
                 println "CopyLibs Artifact: ${it.file.path}"
                 return it.file
