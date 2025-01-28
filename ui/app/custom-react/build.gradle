@@ -1,7 +1,7 @@
 buildDir = "dist"
 
 tasks.register('clean') {
-    dependsOn npmClean
+  dependsOn npmClean
 }
 
 tasks.register('installDist', Copy) {

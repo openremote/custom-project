@@ -21,7 +21,7 @@ scmVersion {
 
 allprojects {
     // Apply common project setup
-    apply from: "${project.rootDir}/project.gradle"
+    apply from: "${rootDir}/project.gradle"
 }
 
 // Uncomment the following to configure files to be encrypted/decrypted

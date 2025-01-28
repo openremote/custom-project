@@ -1,11 +1,20 @@
 // Common configuration applied to all projects
-import java.nio.file.*
-import java.nio.file.attribute.*
+
+import java.io.Serializable
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.nio.file.attribute.PosixFileAttributes
+import java.nio.file.attribute.PosixFilePermission
 import java.util.stream.Collectors
-import java.util.stream.Stream
 import java.util.stream.StreamSupport
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility
+
+import org.gradle.language.base.plugins.LifecycleBasePlugin
+import org.jetbrains.gradle.ext.Application
+import org.jetbrains.gradle.ext.JUnit
+
 import cz.habarta.typescript.generator.DateMapping
 import cz.habarta.typescript.generator.EnumMapping
 import cz.habarta.typescript.generator.Jackson2Configuration
@@ -19,8 +28,6 @@ import cz.habarta.typescript.generator.TypeScriptOutputKind
 import static org.apache.tools.ant.taskdefs.condition.Os.FAMILY_WINDOWS
 import static org.apache.tools.ant.taskdefs.condition.Os.isFamily
 import static org.jetbrains.gradle.ext.ShortenCommandLine.MANIFEST
-import org.jetbrains.gradle.ext.Application
-import org.jetbrains.gradle.ext.JUnit
 
 configurations.all {
     resolutionStrategy {
@@ -267,7 +274,7 @@ def createTSGeneratorConfig(boolean outputAPIClient, String outputFileName, Proj
             Path packagePath = it.toPath().relativize(srcPath.toPath())
             return StreamSupport
                     .stream(packagePath.spliterator(), false)
-                    .map(Path::toString)
+                    .map({ java.nio.file.Path path -> path.toString() })
                     .collect(Collectors.joining(".")) + (outputAPIClient ? ".**Resource" : ".**")
         }
     }.toList()
@@ -392,6 +399,11 @@ plugins.withType(JavaPlugin).whenPluginAdded {
         // JAR/ZIP base name is the fully qualified subproject name
         archivesName = "${rootProject.name}${path.replaceAll(":", "-")}"
     }
+}
+
+// Configure Spotless
+if (project == rootProject) {
+  apply from: "${rootDir}/spotless.gradle"
 }
 
 // POM generator
