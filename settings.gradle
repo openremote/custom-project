@@ -23,6 +23,7 @@ pluginManagement {
 // configuration into convention plugins/build logic so their versions can be
 // managed through libs.versions.toml.
 plugins {
+    id 'com.diffplug.spotless' version "$spotlessVersion" apply false
     id 'cz.habarta.typescript-generator' version "$typescriptGeneratorVersion" apply false
     id 'org.jetbrains.gradle.plugin.idea-ext' version "$ideaExtPluginVersion" apply false
 }

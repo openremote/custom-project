@@ -27,6 +27,7 @@ console/iOS/Pods
 manager/.factorypath/
 Pods/
 node_modules/
+.eslintcache
 .pnp.*
 .yarn/*
 !.yarn/patches
