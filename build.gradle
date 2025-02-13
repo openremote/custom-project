@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2' }
+    }
+    dependencies {
+        classpath 'com.diffplug.spotless:spotless-plugin-gradle:7.0.2'
+    }
+}
+
 allprojects {
     // Apply common project setup
     apply from: "${project.rootDir}/project.gradle"
