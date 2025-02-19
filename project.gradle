@@ -24,6 +24,7 @@ configurations.all {
 
         // This has been replaced with org.bouncycastle bcprov-jdk18on
         exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
+
         eachDependency { DependencyResolveDetails details ->
             if (details.requested.group == 'org.eclipse.angus' && details.requested.name == 'angus-activation' && details.requested.version == '1.0.0') {
                 details.useVersion '2.0.0'
