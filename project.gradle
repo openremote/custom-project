@@ -116,7 +116,7 @@ if (project == rootProject) {
                     workingDirectory = projectDir.toString()
                 }
                 "Empty"(Application) {
-                    moduleName = getProject().idea.module.name + ".manager.main"
+                    moduleName = getProject().idea.module.name + ".openremote.manager.main"
                 }
                 "Custom Deployment"(Application) {
                     moduleName = "${getProject().idea.module.name}.setup.main"
