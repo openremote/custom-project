@@ -11,7 +11,6 @@ import static org.jetbrains.gradle.ext.ShortenCommandLine.MANIFEST
 import org.jetbrains.gradle.ext.Application
 import org.jetbrains.gradle.ext.JUnit
 
-
 configurations.all {
     resolutionStrategy {
 
@@ -23,9 +22,14 @@ configurations.all {
         // This has been replaced with eclipse angus implementation
         exclude group: "com.sun.activation", module: "jakarta.activation"
 
+        // This has been replaced with org.bouncycastle bcprov-jdk18on
+        exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
         eachDependency { DependencyResolveDetails details ->
             if (details.requested.group == 'org.eclipse.angus' && details.requested.name == 'angus-activation' && details.requested.version == '1.0.0') {
                 details.useVersion '2.0.0'
+            }
+            if (details.requested.group == 'commons-io' && details.requested.name == 'commons-io') {
+                details.useVersion '2.14.0'
             }
         }
     }
@@ -43,17 +47,12 @@ if (project == rootProject) {
                 def path = Paths.get(rootProject.projectDir.path, ".git/hooks/pre-commit")
                 def f = path.toFile()
                 f.text = """#!/bin/sh
-
 echo "***** Running gradle encryption plugin checkFilesGitIgnored task ******"
-
 ./gradlew checkFilesGitIgnoredNew
-
 status=\$?
-
 if [ \$status != 0 ]; then
    echo "***** One or more encrypted files are not listed in a .gitignore - please add to prevent unencrypted version of file(s) from being committed *****"
 fi
-
 exit \$status
 """
                 Set<PosixFilePermission> perms = Files.readAttributes(path, PosixFileAttributes.class).permissions()
@@ -115,21 +114,18 @@ if (project == rootProject) {
                     shortenCommandLine = MANIFEST
                     workingDirectory = projectDir.toString()
                 }
-                "Empty"(Application) {
-                    moduleName = getProject().idea.module.name + ".openremote.manager.main"
+                "Demo Setup"(Application) {
+                    moduleName = getProject().idea.module.name + ".setup.demo"
+                    envs = [
+                            OR_SETUP_TYPE: "demo"
+                    ]
                 }
-            }
-        }
-
-        idea.project.settings.runConfigurations {
-            "Custom Deployment"(Application) {
-                moduleName = "${getProject().idea.module.name}.setup.main"
-                envs = [
-                    OR_MAP_SETTINGS_PATH: "deployment/map/mapsettings.json",
-                    OR_MAP_TILES_PATH: "deployment/map/mapdata.mbtiles",
-                    OR_CUSTOM_APP_DOCROOT: "deployment/manager/app",
-                    OR_CONSOLE_APP_CONFIG_DOCROOT: "deployment/manager/consoleappconfig"
-                ]
+                "Test Setup"(Application) {
+                    moduleName = getProject().idea.module.name + ".setup.integration"
+                }
+                "Empty"(Application) {
+                    moduleName = getProject().idea.module.name + ".manager.main"
+                }
             }
         }
     }
@@ -145,6 +141,7 @@ subprojects {
 // Default repositories for dependency resolution
 repositories {
     mavenLocal()
+    // Needs to be above central due to org.geotools:gt-main issues
     maven {
         url = "https://repo.osgeo.org/repository/release/"
     }
@@ -154,6 +151,12 @@ repositories {
     }
     maven {
         url = "https://s01.oss.sonatype.org/content/repositories/snapshots"
+    }
+    maven {
+        url = "https://repo.jenkins-ci.org/releases/"
+    }
+    maven {
+        url = 'https://jitpack.io'
     }
 }
 
@@ -378,10 +381,10 @@ tasks.register('tscWatch', Exec) {
 // Configure Java build
 plugins.withType(JavaPlugin).whenPluginAdded {
 
-    // Use Java 17
+    // Use Java 21
     tasks.withType(JavaCompile) {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
         def warnLogFile = file("$buildDir/${name}Warnings.log")
         logging.addStandardErrorListener(new StandardOutputListener() {
             void onOutput(CharSequence output) {
