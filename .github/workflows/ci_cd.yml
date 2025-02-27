@@ -5,7 +5,7 @@ on:
   # Push excluding tags and workflow changes
   push:
     branches:
-      - '**'
+      - 'main'
     tags-ignore:
       - '*.*'
     paths-ignore:
