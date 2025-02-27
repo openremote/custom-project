@@ -13,6 +13,9 @@ on:
       - '.ci_cd/**'
       - '**/*.md'
 
+  # PR
+  pull_request:
+
   # When a release is published
   release:
     types: [published]
