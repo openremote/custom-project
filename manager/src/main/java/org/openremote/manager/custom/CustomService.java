@@ -22,6 +22,9 @@ package org.openremote.manager.custom;
 import org.openremote.model.Container;
 import org.openremote.model.ContainerService;
 
+/**
+ * Test
+ */
 public class CustomService implements ContainerService {
     @Override
     public void init(Container container) throws Exception {
