@@ -1,7 +1,12 @@
 apply plugin: "java-library"
 
+configurations {
+    managerRuntime
+}
+
 dependencies {
     api project(":setup")
+    managerRuntime "io.openremote:openremote-manager:$openremoteVersion"
 }
 
 tasks.register('license') {
