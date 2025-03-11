@@ -306,26 +306,10 @@ def getYarnInstallTask() {
     }
 }
 
-// Gets the list of runtime JAR dependencies; can be used in custom project deployment installDist task to populate
-// extensions directory
-def getDeploymentJars(Project project = project) {
-    if (project.configurations.find { it.name == "runtimeClasspath" } == null) {
-        return []
-    }
-
-    // Dependencies already part of the manager are excluded so they do not appear on the classpath twice
-    return project.configurations.runtimeClasspath.resolvedConfiguration.resolvedArtifacts
-            .findAll { !it.file.path.contains(".gradle") && !it.file.path.contains(".m2") }
-            .collect {
-                println "CopyLibs Artifact: ${it.file.path}"
-                return it.file
-            }
-}
 
 ext {
     resolveTask = this.&resolveTask
     getYarnInstallTask = this.&getYarnInstallTask
-    getDeploymentJars = this.&getDeploymentJars
     createTSGeneratorConfigForClient = this.&createTSGeneratorConfigForClient
     createTSGeneratorConfigForModel = this.&createTSGeneratorConfigForModel
 }

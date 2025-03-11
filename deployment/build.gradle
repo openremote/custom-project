@@ -1,7 +1,12 @@
 apply plugin: "java-library"
 
+configurations {
+    managerRuntime
+}
+
 dependencies {
     api project(":setup")
+    managerRuntime "io.openremote:openremote-manager:$openremoteVersion"
 }
 
 tasks.register('license') {
@@ -35,10 +40,14 @@ tasks.register('installDist', Copy) {
 
     into("image") {
         from projectDir
-        exclude "build.gradle", "Dockerfile", "build", "**/*.mbtiles", "src", "**/*.md", ".gitignore"
+        exclude "build.gradle", "Dockerfile", "build", "**/*.mbtiles", "src", "**/*.md", ".gitignore", "**/*.encrypted"
     }
 
     into("image/manager/extensions") {
-        from getDeploymentJars()
+        from configurations.runtimeClasspath.resolvedConfiguration.resolvedArtifacts.collect {it.file }
+        // Don't include deps baked into the manager docker image
+        exclude configurations.managerRuntime.resolvedConfiguration.resolvedArtifacts.collect {it.file.name }
+        // Don't include any ui packaged JARs (used for dev purposes only)
+        exclude { (it.file.path.contains(".gradle")  || it.file.path.contains(".m2")) && it.file.path.contains("io.openremote.ui") }
     }
 }
