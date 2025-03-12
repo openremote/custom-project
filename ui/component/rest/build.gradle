@@ -24,6 +24,13 @@ generateTypeScript createTSGeneratorConfigForClient("src/restclient.ts", new Fil
 generateTypeScript.dependsOn resolveTask(":ui:component:model:generateTypeScript")
 generateTypeScript.onlyIf { countResourceClasses() > 0 }
 npmBuild.onlyIf { countResourceClasses() > 0 }
+tasks.register('dummyRestClient') {
+    onlyIf { countResourceClasses() == 0 }
+    doLast {
+        file("${projectDir}/src/restclient.ts").text = 'export class ApiClient {}'
+    }
+}
+generateTypeScript.finalizedBy dummyRestClient
 
 def countResourceClasses() {
     // Get the main source set's output classes directory
