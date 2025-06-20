@@ -7,6 +7,6 @@
     "ui/demo/*"
   ],
   "devDependencies": {
-    "@openremote/util": "~1.6.3"
+    "@openremote/util": "~1.6.4"
   }
 }
