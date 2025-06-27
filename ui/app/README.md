@@ -14,6 +14,6 @@ This is an example web application built with Lit Web Components and Webpack.
 Apps in our main OpenRemote repository are built with these technologies as well.
 It can be used as a template to add your own pages on top of it.
 
-### /custom-example-react
-This is an example web application built with React 19 and RSBuild.  
+### /custom-app-react
+This is an example web application built with React 19 and RSPack.  
 *(more information soon)*
