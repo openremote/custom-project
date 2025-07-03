@@ -2465,7 +2465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openremote/core@npm:1.6.5":
+"@openremote/core@npm:1.6.5, @openremote/core@npm:^1.6.5":
   version: 1.6.5
   resolution: "@openremote/core@npm:1.6.5"
   dependencies:
@@ -2486,7 +2486,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@openremote/custom-app-react@workspace:ui/app/custom-app-react"
   dependencies:
-    "@openremote/or-chart": "npm:^1.6.5"
+    "@openremote/core": "npm:^1.6.5"
+    "@openremote/model": "npm:^1.6.5"
     "@openremote/or-mwc-components": "npm:^1.6.5"
     "@rspack/cli": "npm:^1.1.8"
     "@rspack/core": "npm:^1.1.8"
@@ -2557,7 +2558,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openremote/model@npm:1.6.5":
+"@openremote/model@npm:1.6.5, @openremote/model@npm:^1.6.5":
   version: 1.6.5
   resolution: "@openremote/model@npm:1.6.5"
   checksum: 10/643a4de11861f61143b92565ce7b4c3fef7c36b4b96c31af7ee337614db049ba479f2357143fc0c4e29352790139fa0a0506e0e2345f9e80b05cae31da8a5295
@@ -2691,7 +2692,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openremote/or-chart@npm:1.6.5, @openremote/or-chart@npm:^1.6.5":
+"@openremote/or-chart@npm:1.6.5":
   version: 1.6.5
   resolution: "@openremote/or-chart@npm:1.6.5"
   dependencies:

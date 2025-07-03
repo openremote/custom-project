@@ -10,7 +10,8 @@
     "serve": "cross-env NODE_ENV=development rspack serve"
   },
   "dependencies": {
-    "@openremote/or-chart": "^1.6.5",
+    "@openremote/core": "^1.6.5",
+    "@openremote/model": "^1.6.5",
     "@openremote/or-mwc-components": "^1.6.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
