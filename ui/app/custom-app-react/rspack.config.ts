@@ -10,6 +10,11 @@ const targets = ["chrome >= 87", "edge >= 88", "firefox >= 78", "safari >= 14"];
 
 export default defineConfig({
 	context: __dirname,
+	devServer: {
+		host: "0.0.0.0",
+		port: 9000,
+		open: false
+	},
 	entry: {
 		main: "./src/main.tsx"
 	},
@@ -65,6 +70,9 @@ export default defineConfig({
 				minimizerOptions: { targets }
 			})
 		]
+	},
+	output: {
+		publicPath: isDev ? "/custom/" : "/",
 	},
 	experiments: {
 		css: true
