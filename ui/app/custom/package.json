@@ -12,13 +12,13 @@
     "clean": "npx tsc -b --clean && npx shx rm -rf dist",
     "modelBuild": "npx orutil build",
     "modelWatch": "npx orutil watch",
-    "build": "npx cross-env NODE_OPTIONS=--max_old_space_size=4096 webpack --mode production",
-    "serve": "npx tsc -b --clean && npx shx rm -rf dist && npx orutil build && npx cross-env NODE_OPTIONS=--max_old_space_size=4096 webpack serve --mode development",
-    "serveNoModelBuild": "npx tsc -b --clean && npx cross-env NODE_OPTIONS=--max_old_space_size=4096 webpack serve --mode development",
+    "build": "npx cross-env NODE_OPTIONS=--max_old_space_size=4096 rspack --mode production",
+    "serve": "npx tsc -b --clean && npx shx rm -rf dist && npx orutil build && npx cross-env NODE_OPTIONS=--max_old_space_size=4096 rspack serve --mode development",
+    "serveNoModelBuild": "npx tsc -b --clean && npx cross-env NODE_OPTIONS=--max_old_space_size=4096 rspack serve --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@openremote/manager": "~1.7.0",
+    "@openremote/manager": "~1.8.0-snapshot",
     "model": "workspace:*",
     "rest": "workspace:*"
   },
@@ -30,7 +30,9 @@
     "@babel/plugin-transform-runtime": "^7.16.4",
     "@babel/preset-env": "^7.16.4",
     "@babel/runtime": "^7.16.3",
-    "@openremote/util": "~1.7.0",
+    "@openremote/util": "~1.8.0-snapshot",
+    "@rspack/cli": "~1.4.11",
+    "@rspack/core": "~1.4.11",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
     "babel-loader": "^8.2.3",
