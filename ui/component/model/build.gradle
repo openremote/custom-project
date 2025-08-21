@@ -35,6 +35,11 @@ clean {
     }
 }
 
+tasks.register('npmTest', Exec) {
+    dependsOn getYarnInstallTask()
+    commandLine npmCommand("yarn"), "run", "test"
+}
+
 tasks.register('prepareUi') {
     dependsOn clean, npmPrepare
 }
