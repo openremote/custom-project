@@ -10,7 +10,7 @@ The OpenRemote documentation contains more information about how to use this rep
 
 ## Docker Compose Files
 
-In the `profile` directory you can find different Docker compose files, each serving a different purpose. To be able to use them, you'll need to download a copy of the `deploy.yml` file from the main OpenRemote repository and place it in the `profile` directory, to ensure you always have the latest version of the file:
+In the `profile` directory you can find different Docker compose files, each serving a different purpose. To be able to use them, you'll need to download a copy of the `deploy.yml` file from the main OpenRemote repository and place it in the `openremote/profile` directory, to ensure you always have the latest version of the file:
 
 ```bash
 mkdir -p openremote/profile && curl -L https://github.com/openremote/openremote/raw/refs/heads/master/profile/deploy.yml -o openremote/profile/deploy.yml
