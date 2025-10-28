@@ -69,6 +69,11 @@ clean {
 build.dependsOn generateTypeScript, npmBuild
 npmBuild.dependsOn generateTypeScript
 
+tasks.register('npmTest', Exec) {
+    dependsOn getYarnInstallTask()
+    commandLine npmCommand("yarn"), "run", "test"
+}
+
 tasks.register('prepareUi') {
     dependsOn clean, build, npmPrepare
 }
