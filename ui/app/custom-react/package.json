@@ -1,13 +1,14 @@
 {
-  "name": "@openremote/custom-app-react",
+  "name": "@openremote/custom-react",
   "version": "1.0.0",
   "description": "OpenRemote Custom App using React",
   "author": "OpenRemote",
   "license": "AGPL-3.0-or-later",
   "private": true,
   "scripts": {
-    "build": "cross-env NODE_ENV=production rspack build",
-    "serve": "cross-env NODE_ENV=development rspack serve"
+    "clean": "npx tsc -b --clean && npx shx rm -rf dist",
+    "build": "npx cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 rspack build",
+    "serve": "npx cross-env NODE_ENV=development NODE_OPTIONS=--max_old_space_size=4096 rspack serve"
   },
   "dependencies": {
     "@openremote/core": "^1.9.0",
@@ -19,7 +20,6 @@
   "devDependencies": {
     "@rspack/cli": "^1.5.8",
     "@rspack/core": "^1.5.8",
-    "@rspack/plugin-react-refresh": "1.5.2",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "cross-env": "^10.1.0",

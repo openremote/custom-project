@@ -1,12 +1,10 @@
 import { defineConfig } from "@rspack/cli";
 import { rspack } from "@rspack/core";
-import ReactRefreshPlugin from "@rspack/plugin-react-refresh";
 
 const isDev = process.env.NODE_ENV === "development";
 
 // Target browsers, see: https://github.com/browserslist/browserslist
 const targets = ["chrome >= 87", "edge >= 88", "firefox >= 78", "safari >= 14"];
-
 
 export default defineConfig({
 	context: __dirname,
@@ -42,16 +40,8 @@ export default defineConfig({
 								parser: {
 									syntax: "typescript",
 									tsx: true
-								},
-								/*transform: {
-									react: {
-										runtime: "automatic",
-										development: isDev,
-										refresh: isDev
-									}
-								}*/
-							},
-							/*env: { targets }*/
+								}
+							}
 						}
 					}
 				]
@@ -59,10 +49,13 @@ export default defineConfig({
 		]
 	},
 	plugins: [
-        isDev && new ReactRefreshPlugin(),
 		new rspack.HtmlRspackPlugin({
 			template: "./index.html"
-		})
+		}),
+        // Define MANAGER_URL as a global variable
+        new rspack.DefinePlugin({
+            MANAGER_URL: JSON.stringify(process.env.MANAGER_URL ?? (isDev ? "http://localhost:8080" : undefined))
+        })
 	],
 	optimization: {
 		minimizer: [
@@ -73,7 +66,7 @@ export default defineConfig({
 		]
 	},
 	output: {
-		publicPath: isDev ? "/custom/" : "/",
+		publicPath: isDev ? "/custom-react/" : "/",
 	},
 	experiments: {
 		css: true

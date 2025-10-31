@@ -17,6 +17,6 @@ This is an example web application built with [Lit Web Components](https://lit.d
 Apps in our main OpenRemote [repository](https://github.com/openremote/openremote) are built with these technologies as well.  
 It can be used as a template to add your own pages on top of it.
 
-### /custom-app-react
+### /custom-react
 This is an example web application built with [React 19](https://react.dev) and [RSPack](https://rspack.rs).  
 *(more information soon)*
