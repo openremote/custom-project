@@ -18,8 +18,8 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@rspack/cli": "^1.5.8",
-    "@rspack/core": "^1.5.8",
+    "@rspack/cli": "^1.6.1",
+    "@rspack/core": "^1.6.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "cross-env": "^10.1.0",
