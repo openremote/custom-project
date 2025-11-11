@@ -4,7 +4,7 @@ In this folder, you can add custom (web) applications that will be shipped along
 For example, special mobile apps for end users, or apps for less-technical consumers are widespread.  
 
 Developing these custom apps is pretty straightforward, thanks to the built-in packages we provide.  
-These make communicating with OpenRemote easier, and allows developers to quickly set up an user interface.
+These make communicating with OpenRemote easier, and allows developers to quickly set up a user interface.
 
 ## Example apps
 
