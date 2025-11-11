@@ -9,7 +9,7 @@ These make communicating with OpenRemote easier, and allows developers to quickl
 ## Example apps
 
 We provided several example apps to get familiar with the architecture.  
-All apps can be ran using `npm run serve`, and visited at http://localhost:9000/custom/.  
+All apps can be run using `npm run serve`, and visited at http://localhost:9000/custom/.  
 Here's a list of the apps, and what they do;
 
 ### /custom
