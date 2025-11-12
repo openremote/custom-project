@@ -1,5 +1,5 @@
 import React from "react";
-import openremoteLogo from "./assets/openremote.svg";
+import openremoteLogo from "../assets/openremote.svg";
 import {InputType} from "@openremote/or-mwc-components/or-mwc-input";
 import type {} from "@openremote/or-mwc-components/jsx";
 import "./App.css";

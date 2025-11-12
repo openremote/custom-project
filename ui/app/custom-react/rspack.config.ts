@@ -55,6 +55,12 @@ export default defineConfig({
         // Define MANAGER_URL as a global variable
         new rspack.DefinePlugin({
             MANAGER_URL: JSON.stringify(process.env.MANAGER_URL ?? (isDev ? "http://localhost:8080" : undefined))
+        }),
+        // Import assets
+        new rspack.CopyRspackPlugin({
+            patterns: [
+                { from: "./assets", to: "assets" }
+            ]
         })
 	],
 	optimization: {
