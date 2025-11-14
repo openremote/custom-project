@@ -20,6 +20,11 @@ export default defineConfig({
         extensions: ["...", ".ts", ".tsx", ".jsx"]
     },
     module: {
+        parser: {
+            "css/auto": {
+                namedExports: false,
+             },
+        },
         rules: [
             {
                 test: /\.svg$/,
