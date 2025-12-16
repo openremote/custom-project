@@ -25,7 +25,7 @@ import org.openremote.model.security.ClientRole;
 import org.openremote.model.security.Realm;
 import org.openremote.model.util.TextUtil;
 
-import static org.openremote.container.util.MapAccess.getString;
+import static org.openremote.model.util.MapAccess.getString;
 
 public class CustomKeycloakSetup extends AbstractKeycloakSetup {
 
