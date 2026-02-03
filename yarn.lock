@@ -1154,7 +1154,7 @@ __metadata:
     "@rspack/cli": "npm:~1.7.2"
     "@rspack/core": "npm:~1.7.2"
     css-loader: "npm:^7.1.2"
-    html-webpack-plugin: "npm:^5.5.0"
+    html-webpack-plugin: "npm:^5.6.6"
     model: "workspace:*"
     moment-locales-webpack-plugin: "npm:^1.2.0"
     querystring-es3: "npm:^0.2.1"
@@ -4068,7 +4068,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-webpack-plugin@npm:^5.5.0":
+"html-webpack-plugin@npm:^5.6.6":
   version: 5.6.6
   resolution: "html-webpack-plugin@npm:5.6.6"
   dependencies:
