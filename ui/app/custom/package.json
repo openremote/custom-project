@@ -31,6 +31,7 @@
     "moment-locales-webpack-plugin": "^1.2.0",
     "querystring-es3": "^0.2.1",
     "shx": "^0.4.0",
+    "source-map-loader": "^5.0.0",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
     "webpack": "^5.99.8"
