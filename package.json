@@ -1,12 +1,15 @@
 {
   "packageManager": "yarn@4.12.0",
   "private": true,
+  "resolutions": {
+    "axios": "1.13.2"
+  },
   "workspaces": [
     "ui/app/*",
     "ui/component/*",
     "ui/demo/*"
   ],
   "devDependencies": {
-    "@openremote/util": "~1.13.1"
+    "@openremote/util": "~1.15.1"
   }
 }
