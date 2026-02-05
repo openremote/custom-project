@@ -6,7 +6,8 @@
         50.839134
       ],
       "zoom": 7,
-      "boxZoom": false
+      "boxZoom": false,
+      "geocodeUrl": "https://nominatim.openstreetmap.org"
     }
   },
   "version": 8,
