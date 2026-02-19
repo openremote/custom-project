@@ -2,6 +2,8 @@
 
 This repository is a template for custom projects; showing the recommended project structure and including `README` files in the `deployment` directory to provide details about how to customise each part.
 
+<br />
+
 ---
 
 # (PROJECT_NAME)
@@ -56,7 +58,7 @@ All requests from and towards running services go through the [HAProxy](https://
 Before starting, make sure you have cloned the Git repository locally, as this is required.
 Follow the initial guides on the OpenRemote documentation on [preparing the environment](https://docs.openremote.io/docs/developer-guide/preparing-the-environment), [installing and using Docker](https://docs.openremote.io/docs/developer-guide/installing-and-using-docker), and on [setting up an IDE](https://docs.openremote.io/docs/developer-guide/setting-up-an-ide).
 
-*(Please describe the steps necessary to run this custom project locally. It often requires special actions, such as creating assets manually through the Manager UI.)*
+*(Please describe the steps necessary to run this custom project locally.)*
 
 ### Docker Compose files
 In the `profile` directory you can find different Docker compose files, each serving a different purpose. To be able to use them, you'll need to download a copy of the `deploy.yml` file from the main OpenRemote repository and place it in the `openremote/profile` directory, to ensure you always have the latest version of the file:
