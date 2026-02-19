@@ -70,15 +70,16 @@ mkdir -p openremote/profile && curl -L https://github.com/openremote/openremote/
 
 ### Environment variables
 
-| Key                  | Containers      | Description                                                                                                  | Default  |
-|----------------------|-----------------|--------------------------------------------------------------------------------------------------------------|----------|
-| `OR_HOSTNAME`        | All containers  | **(REQUIRED)** FQDN hostname of where this instance will be exposed (localhost, IP address or public domain) | -        |
-| `OR_ADMIN_PASSWORD`  | All containers  | **(REQUIRED)** Initial admin user password                                                                   | -        |
-| `MANAGER_VERSION`    | `manager`       | The OpenRemote version in use.                                                                               | 'latest' |
-| `KEYCLOAK_VERSION`   | `keycloak`      | The Keycloak version in use.                                                                                 | 'latest' |
-| `PROXY_VERSION`      | `proxy`         | The HAProxy version in use.                                                                                  | 'latest' |
-| `DEPLOYMENT_VERSION` | *(build tools)* | Tag to use when building the Docker image of this custom project.                                            | -        |
+| Key                  | Containers            | Description                                                                                                                       | Default  |
+|----------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------|----------|
+| `OR_HOSTNAME`        | All services          | **(REQUIRED)** FQDN hostname of where this instance will be exposed (localhost, IP address or public domain)                      | -        |
+| `OR_ADMIN_PASSWORD`  | `keycloak`, `manager` | **(REQUIRED)** Initial admin user password                                                                                        | -        |
+| `DEPLOYMENT_VERSION` | `deployment`          | **(REQUIRED)** The custom project version in use. This tag is used for building and deploying the artifacts from this repository. | -        |
+| `MANAGER_VERSION`    | `manager`             | The OpenRemote version in use.                                                                                                    | 'latest' |
+| `KEYCLOAK_VERSION`   | `keycloak`            | The Keycloak version in use.                                                                                                      | 'latest' |
+| `PROXY_VERSION`      | `proxy`               | The HAProxy version in use.                                                                                                       | 'latest' |
 
+A list of all environment variables from OpenRemote can be found [here](https://github.com/openremote/openremote/raw/refs/heads/master/profile/deploy.yml).
 <!-- Feel free to add additional chapters on developer information such as local gateway setup, encrypted files in the repository, etc. -->
 
 ## Deployments / environments
