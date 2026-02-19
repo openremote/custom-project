@@ -13,7 +13,8 @@ They use ESP32 hardware that autoprovisions in the OpenRemote platform through t
 This hardware gets delivered to end consumers in their homes, where they can use a dedicated app for monitoring their solar panels."
 -->
 
-> This repository is set up using the Custom Project template. This repository uses the same standards and folder structure. More information about how to use this repository as a template to develop your own agents, services, model classes, setup tasks, tests, and new UI apps, can be found in the [OpenRemote documentation](https://docs.openremote.io/docs/developer-guide/creating-a-custom-project).<!-- If different than "normal custom projects", you can replace or add information here. For example, note additional folders, or source code outside this repository. -->
+> This repository is set up using the [Custom Project template](https://github.com/openremote/custom-project/). This repository uses the same standards and folder structure. More information about how to use this repository as a template to develop your own agents, services, model classes, setup tasks, tests, and new UI apps, can be found in the [OpenRemote documentation](https://docs.openremote.io/docs/developer-guide/creating-a-custom-project).
+<!-- If different than "normal custom projects", you can replace or add information here. For example, note additional folders, or source code outside this repository. -->
 
 ## Project context
 
@@ -55,7 +56,7 @@ All requests from and towards running services go through the [HAProxy](https://
 Before starting of, make sure you have cloned the Git repository locally, as this is required.
 Follow the initial guides on the OpenRemote documentation on [preparing the environment](https://docs.openremote.io/docs/developer-guide/preparing-the-environment), [installing and using Docker](https://docs.openremote.io/docs/developer-guide/installing-and-using-docker), and on [setting up an IDE](https://docs.openremote.io/docs/developer-guide/setting-up-an-ide).
 
-<!-- Describe the steps necessary to run this custom project locally through Docker. It often requires a special OR_SETUP_TYPE, or creating of assets manually through the UI. -->
+*(Please describe the steps necessary to run this custom project locally. It often requires special actions, such as creating assets manually through the Manager UI.)*
 
 ### Docker Compose files
 In the `profile` directory you can find different Docker compose files, each serving a different purpose. To be able to use them, you'll need to download a copy of the `deploy.yml` file from the main OpenRemote repository and place it in the `openremote/profile` directory, to ensure you always have the latest version of the file:
