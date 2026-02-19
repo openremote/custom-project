@@ -44,10 +44,13 @@ This hardware gets delivered to end consumers in their homes, where they can use
 if they write Groovy scripts yes/no, if they have their own outside repository, etc. -->
 
 ## Architecture
-<!-- Preferably a diagram, or short explanation of the high level architecture. What systems are there, and how do they interact with each other. -->
+*(Please insert, preferably a diagram, or short explanation of the high level architecture)*
+<!-- For example; What systems are there, and how do they interact with each other. -->
+
 ### Keycloak setup
 The identity provider in place is [Keycloak](https://github.com/openremote/keycloak), running in its own container. The default configuration from the repository ([link](https://github.com/openremote/keycloak)) is used.
 <!-- If the identity provider setup is different, or a custom configuration is used, please specify. -->
+
 ### Proxy setup
 All requests from and towards running services go through the [HAProxy](https://github.com/openremote/proxy) container. The default configuration from the repository ([link](https://github.com/openremote/proxy/blob/main/haproxy.cfg)) is used.
 <!-- If the proxy setup is different, or a custom configuration is used, please specify. -->
