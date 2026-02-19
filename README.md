@@ -2,7 +2,7 @@
 
 This repository is a template for custom projects; showing the recommended project structure and including `README` files in the `deployment` directory to provide details about how to customise each part.
 
-<br />
+**[You can find the documentation here](https://docs.openremote.io/docs/user-guide/deploying/custom-deployment/)**.
 
 ---
 
