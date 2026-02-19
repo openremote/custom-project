@@ -8,7 +8,7 @@ This repository is a template for custom projects; showing the recommended proje
 
 *(Please describe, in a short summary, the context of the project.)*
 <!-- For example;
-"OpenRemote produces sensors for monitoring the power production solar panels.
+"OpenRemote produces sensors for monitoring the power production of solar panels.
 They use ESP32 hardware that autoprovisions in the OpenRemote platform through the cloud.
 This hardware gets delivered to end consumers in their homes, where they can use a dedicated app for monitoring their solar panels."
 -->
@@ -53,7 +53,7 @@ All requests from and towards running services go through the [HAProxy](https://
 ## Developer Guide
 
 ### Quickstart
-Before starting of, make sure you have cloned the Git repository locally, as this is required.
+Before starting, make sure you have cloned the Git repository locally, as this is required.
 Follow the initial guides on the OpenRemote documentation on [preparing the environment](https://docs.openremote.io/docs/developer-guide/preparing-the-environment), [installing and using Docker](https://docs.openremote.io/docs/developer-guide/installing-and-using-docker), and on [setting up an IDE](https://docs.openremote.io/docs/developer-guide/setting-up-an-ide).
 
 *(Please describe the steps necessary to run this custom project locally. It often requires special actions, such as creating assets manually through the Manager UI.)*
