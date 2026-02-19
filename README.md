@@ -4,6 +4,8 @@ This repository is a template for custom projects; showing the recommended proje
 
 **[You can find the documentation here](https://docs.openremote.io/docs/user-guide/deploying/custom-deployment/)**.
 
+<br />
+
 ---
 
 # (PROJECT_NAME)
