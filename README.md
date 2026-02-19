@@ -76,7 +76,7 @@ mkdir -p openremote/profile && curl -L https://github.com/openremote/openremote/
 
 ## Deployments / environments
 
-This custom project is deployed by OpenRemote on their managed infrastructure. It's running in Docker containers, using the `docker-compose.yml` file in the root folder of the repository. All deployments are ran using the GitHub Actions CI/CD action.
+This custom project is deployed by OpenRemote on their managed infrastructure. It's running in Docker containers, using the `docker-compose.yml` file in the root folder of the repository. All deployments are run using the GitHub Actions CI/CD action.
 <!-- If applicable, specify otherwise -->
 
 The list of available environments:
