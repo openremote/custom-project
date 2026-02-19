@@ -2,28 +2,96 @@
 
 This repository is a template for custom projects; showing the recommended project structure and including `README` files in the `deployment` directory to provide details about how to customise each part.
 
-## Documentation
+---
 
-The OpenRemote documentation contains more information about how to use this repository as a template to develop your own agents, services, model classes, setup tasks, tests, and new UI apps, including examples you could use as a starting point.
+# (PROJECT_NAME)
 
-**[You can find the documentation here](https://docs.openremote.io/docs/user-guide/deploying/custom-deployment/)**.
+*(Please describe, in a short summary, the context of the project.)*
+<!-- For example;
+"OpenRemote produces sensors for monitoring the power production solar panels.
+They use ESP32 hardware that autoprovisions in the OpenRemote platform through the cloud.
+This hardware gets delivered to end consumers in their homes, where they can use a dedicated app for monitoring their solar panels."
+-->
 
-## Docker Compose Files
+> This repository is set up using the Custom Project template. This repository uses the same standards and folder structure. More information about how to use this repository as a template to develop your own agents, services, model classes, setup tasks, tests, and new UI apps, can be found in the [OpenRemote documentation](https://docs.openremote.io/docs/developer-guide/creating-a-custom-project).<!-- If different than "normal custom projects", you can replace or add information here. For example, note additional folders, or source code outside this repository. -->
 
+## Project context
+
+### Features
+*(Please insert a bullet point list with features specific to this custom project.)*
+<!-- For example:
+  - Custom app for end users to access their solar panel data.
+  - Custom agent for communicating with the ESP32 devices.
+  - Custom HAProxy configuration to add additional services managed by them.
+  - Gateways ...
+  - OR extensions in use ...
+-->
+
+### Vocabulary / common terms
+*(Please insert a bullet point list with common terms in this project, with a short explanation.)*
+<!-- For example:
+  - **Manager UI**: The end-user UI deployed on `https://<url>/manager/` for monitoring devices.
+-->
+
+### Company background
+*(If applicable, write context about the company this custom project is meant for.)*
+<!-- For example, what kind of company they are (installer, manufacturer), what kind of team we're working with, whether they have an in-house development team, who has access to this repository,
+if they write Groovy scripts yes/no, if they have their own outside repository, etc. -->
+
+## Architecture
+<!-- Preferably a diagram, or short explanation of the high level architecture. What systems are there, and how do they interact with each other. -->
+### Keycloak setup
+The identity provider in place is [Keycloak](https://github.com/openremote/keycloak), running in its own container. The default configuration from the repository ([link](https://github.com/openremote/keycloak)) is used.
+<!-- If the identity provider setup is different, or a custom configuration is used, please specify. -->
+### Proxy setup
+All requests from and towards running services go through the [HAProxy](https://github.com/openremote/proxy) container. The default configuration from the repository ([link](https://github.com/openremote/proxy/blob/main/haproxy.cfg)) is used.
+<!-- If the proxy setup is different, or a custom configuration is used, please specify. -->
+
+<!-- Feel free to add additional chapters on architecture specific to this custom project -->
+
+## Developer Guide
+
+### Quickstart
+Before starting of, make sure you have cloned the Git repository locally, as this is required.
+Follow the initial guides on the OpenRemote documentation on [preparing the environment](https://docs.openremote.io/docs/developer-guide/preparing-the-environment), [installing and using Docker](https://docs.openremote.io/docs/developer-guide/installing-and-using-docker), and on [setting up an IDE](https://docs.openremote.io/docs/developer-guide/setting-up-an-ide).
+
+<!-- Describe the steps necessary to run this custom project locally through Docker. It often requires a special OR_SETUP_TYPE, or creating of assets manually through the UI. -->
+
+### Docker Compose files
 In the `profile` directory you can find different Docker compose files, each serving a different purpose. To be able to use them, you'll need to download a copy of the `deploy.yml` file from the main OpenRemote repository and place it in the `openremote/profile` directory, to ensure you always have the latest version of the file:
-
 ```bash
 mkdir -p openremote/profile && curl -L https://github.com/openremote/openremote/raw/refs/heads/master/profile/deploy.yml -o openremote/profile/deploy.yml
 ```
 
+### Environment variables
 
-## Setup Tasks
-The following `OR_SETUP_TYPE` value(s) are supported:
+| Key                | Containers | Description                    | Default  |
+|--------------------|------------|--------------------------------|----------|
+| `MANAGER_VERSION`  | `manager`  | The OpenRemote version in use. | 'latest' |
+| `KEYCLOAK_VERSION` | `keycloak` | The Keycloak version in use.   | 'latest' |
+| `PROXY_VERSION`    | `proxy`    | The HAProxy version in use.    | 'latest' |
 
-* `production` - Requires `CUSTOM_USER_PASSWORD` environment variable to be specified 
+<!-- Feel free to add additional chapters on developer information such as local gateway setup, environment variables meant for local testing, etc. -->
 
-Any other value will result in default setup.
+## Deployments / environments
 
-## Encrypted files
-If any encrypted files are added to the project then you will need to specify the `GFE_PASSWORD` environment variable to be able to build the project and decrypt the
-files.
+This custom project is deployed by OpenRemote on their managed infrastructure. It's running in Docker containers, using the `docker-compose.yml` file in the root folder of the repository. All deployments are ran using the GitHub Actions CI/CD action.
+<!-- If applicable, specify otherwise -->
+
+The list of available environments:
+### `staging`
+Used by OpenRemote to test new functionality and bugfixes before publishing them to production. Important practices and agreements to be aware of:
+- This environment is only used for development purposes, so can be offline at any time.
+- There is no guarantee that this data will be persisted in the long-term.
+<!-- If applicable, you can provide additional practices such as "Devices in the field are connected to this" or "Be aware that an external company has API access" -->
+- **OpenRemote Manager:** https://(staging.CUSTOM_HOSTNAME).openremote.app/manager
+- **Custom app:** https://(staging.CUSTOM_HOSTNAME).openremote.app/custom
+<!-- If applicable, add additional URLs to other services or apps -->
+### `production`
+Used for the live system with devices in the field, with guarantee of stability and data persistence. Important practices and agreements to be aware of:
+- There is a daily backup active for this instance.
+- This deployment is **manually updated**, and should be communicated with stakeholders.
+<!-- If applicable, you can provide additional practices, such as "Auto deploys when making a new release through GitHub", or "It updates every 1st day of the month" -->
+- **OpenRemote Manager:** https://(CUSTOM_HOSTNAME).com/manager
+- **Custom app:** https://(CUSTOM_HOSTNAME).com/custom
+<!-- If applicable, add additional URLs to other services or apps -->
