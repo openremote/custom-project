@@ -23,13 +23,12 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "@openremote/rest": "~1.17.3",
-    "model": "workspace:*",
-    "qs": "^6.8.0"
+    "model": "workspace:*"
   },
   "devDependencies": {
     "@openremote/util": "~1.17.3",
-    "@rspack/core": "~1.7.2",
-    "@types/qs": "^6.9.7"
+    "@rspack/core": "*",
+    "typescript": "^5.9.3"
   },
   "publishConfig": {
     "access": "restricted"
