@@ -2,10 +2,6 @@ const util = require("@openremote/util");
 
 bundles = {
     "index": {
-        vendor: {
-            "axios": "axios",
-            "qs": "Qs"
-        },
         excludeOr: true
     },
     "index.bundle": {
