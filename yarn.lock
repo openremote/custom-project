@@ -7755,8 +7755,6 @@ __metadata:
 "root-workspace-0b6124@workspace:.":
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
-  dependencies:
-    "@openremote/util": "npm:~1.17.3"
   languageName: unknown
   linkType: soft
 
