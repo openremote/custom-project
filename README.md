@@ -44,7 +44,7 @@ This hardware gets delivered to end consumers in their homes, where they can use
 if they write Groovy scripts yes/no, if they have their own outside repository, etc. -->
 
 ## Architecture
-*(Please insert, preferably a diagram, or short explanation of the high level architecture)*
+*(Please insert, preferably a diagram, or a short explanation of the high level architecture)*
 <!-- For example; What systems are there, and how do they interact with each other. -->
 
 ### Keycloak setup
