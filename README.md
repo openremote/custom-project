@@ -52,7 +52,7 @@ The identity provider in place is [Keycloak](https://github.com/openremote/keycl
 <!-- If the identity provider setup is different, or a custom configuration is used, please specify. -->
 
 ### Proxy setup
-All requests from and towards running services go through the [HAProxy](https://github.com/openremote/proxy) container. The default configuration from the repository ([link](https://github.com/openremote/proxy/blob/main/haproxy.cfg)) is used.
+All requests from and towards running services go through the [HAProxy](https://github.com/openremote/proxy) container. The default configuration from the repository ([haproxy.cfg](https://github.com/openremote/proxy/blob/main/haproxy.cfg)) is used.
 <!-- If the proxy setup is different, or a custom configuration is used, please specify. -->
 
 <!-- Feel free to add additional chapters on architecture specific to this custom project -->
