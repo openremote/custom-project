@@ -87,7 +87,7 @@ A list of all environment variables from OpenRemote can be found [here](https://
 
 ## Deployments / environments
 
-This custom project is deployed by OpenRemote on their managed infrastructure. It's running in Docker containers, using the `docker-compose.yml` file in the root folder of the repository. All deployments are run using the GitHub Actions CI/CD action.
+This custom project is deployed by OpenRemote on their managed infrastructure. It's running in Docker containers, using the `docker-compose.yml` file in the root folder of the repository. All deployments are run using the GitHub Actions CI/CD workflow.
 <!-- If applicable, specify otherwise -->
 
 The list of available environments:
@@ -96,8 +96,8 @@ Used by OpenRemote to test new functionality and bugfixes before publishing them
 - This environment is only used for development purposes, so can be offline at any time.
 - There is no guarantee that this data will be persisted in the long-term.
 <!-- If applicable, you can provide additional practices such as "Devices in the field are connected to this" or "Be aware that an external company has API access" -->
-- **OpenRemote Manager:** https://(staging.CUSTOM_HOSTNAME).openremote.app/manager
-- **Custom app:** https://(staging.CUSTOM_HOSTNAME).openremote.app/custom
+- **OpenRemote Manager:** https://(staging.CUSTOM_HOSTNAME).com/manager
+- **Custom app:** https://(staging.CUSTOM_HOSTNAME).com/custom
 <!-- If applicable, add additional URLs to other services or apps -->
 ### `production`
 Used for the live system with devices in the field, with guarantee of stability and data persistence. Important practices and agreements to be aware of:
