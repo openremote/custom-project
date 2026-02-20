@@ -82,7 +82,7 @@ mkdir -p openremote/profile && curl -L https://github.com/openremote/openremote/
 | `KEYCLOAK_VERSION`   | `keycloak`            | The Keycloak version in use.                                                                                                      | 'latest' |
 | `PROXY_VERSION`      | `proxy`               | The HAProxy version in use.                                                                                                       | 'latest' |
 
-A list of all environment variables from OpenRemote can be found [here](https://github.com/openremote/openremote/raw/refs/heads/master/profile/deploy.yml).
+A list of all environment variables from OpenRemote can be found [here](https://github.com/openremote/openremote/blob/master/profile/deploy.yml).
 <!-- Feel free to add additional chapters on developer information such as local gateway setup, encrypted files in the repository, etc. -->
 
 ## Deployments / environments
