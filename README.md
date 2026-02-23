@@ -1,6 +1,6 @@
 # OpenRemote Custom Project Template
 
-This repository is a template for custom projects; showing the recommended project structure and including `README` files in the `deployment` directory to provide details about how to customise each part.
+This repository is a template for custom projects; showing the recommended project structure and including `README` files in the `deployment` directory to provide details about how to customize each part.
 
 **[You can find the documentation here](https://docs.openremote.io/docs/user-guide/deploying/custom-deployment/)**.
 
@@ -11,14 +11,14 @@ This repository is a template for custom projects; showing the recommended proje
 # (PROJECT_NAME)
 
 *(Please describe, in a short summary, the context of the project.)*
-<!-- For example;
-"OpenRemote produces sensors for monitoring the power production of solar panels.
-They use ESP32 hardware that autoprovisions in the OpenRemote platform through the cloud.
-This hardware gets delivered to end consumers in their homes, where they can use a dedicated app for monitoring their solar panels."
+<!-- For example:
+OpenRemote produces sensors for monitoring the power production of solar panels.
+They use ESP32 hardware that auto provisions in the OpenRemote platform through the cloud.
+This hardware gets delivered to end consumers in their homes, where they can use a dedicated app for monitoring their solar panels.
 -->
 
-> This repository is set up using the [Custom Project template](https://github.com/openremote/custom-project/). This repository uses the same standards and folder structure. More information about how to use this repository as a template to develop your own agents, services, model classes, setup tasks, tests, and new UI apps, can be found in the [OpenRemote documentation](https://docs.openremote.io/docs/developer-guide/creating-a-custom-project).
-<!-- If different than "normal custom projects", you can replace or add information here. For example, note additional folders, or source code outside this repository. -->
+> This repository is set up using the [Custom Project template](https://github.com/openremote/custom-project/). This repository uses the same standards and folder structure. More information about how to use this repository as a template to develop your own agents, services, model classes, setup tasks, tests, and new UI apps can be found in the [OpenRemote documentation](https://docs.openremote.io/docs/developer-guide/creating-a-custom-project).
+<!-- If different from "normal custom projects", you can replace or add information here. For example, note additional folders, or source code outside this repository. -->
 
 ## Project context
 
@@ -45,7 +45,7 @@ if they write Groovy scripts yes/no, if they have their own outside repository, 
 
 ## Architecture
 *(Please insert, preferably a diagram, or a short explanation of the high level architecture)*
-<!-- For example; What systems are there, and how do they interact with each other. -->
+<!-- For example, what systems are there, and how do they interact with each other. -->
 
 ### Keycloak setup
 The identity provider in place is [Keycloak](https://github.com/openremote/keycloak), running in its own container. The default configuration from the repository ([link](https://github.com/openremote/keycloak)) is used.
@@ -100,7 +100,7 @@ Used by OpenRemote to test new functionality and bugfixes before publishing them
 - **Custom app:** https://(staging.CUSTOM_HOSTNAME).com/custom
 <!-- If applicable, add additional URLs to other services or apps -->
 ### `production`
-Used for the live system with devices in the field, with guarantee of stability and data persistence. Important practices and agreements to be aware of:
+Used for the live system with devices in the field, with a guarantee of stability and data persistence. Important practices and agreements to be aware of:
 - There is a daily backup active for this instance.
 - This deployment is **manually updated**, and should be communicated with stakeholders.
 <!-- If applicable, you can provide additional practices, such as "Auto deploys when making a new release through GitHub", or "It updates every 1st day of the month" -->
