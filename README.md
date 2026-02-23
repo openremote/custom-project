@@ -4,7 +4,6 @@ This repository is a template for custom projects; showing the recommended proje
 
 **[You can find the documentation here](https://docs.openremote.io/docs/user-guide/deploying/custom-deployment/)**.
 
-<br />
 
 ---
 
@@ -40,8 +39,13 @@ This hardware gets delivered to end consumers in their homes, where they can use
 
 ### Company background
 *(If applicable, write context about the company this custom project is meant for.)*
-<!-- For example, what kind of company they are (installer, manufacturer), what kind of team we're working with, whether they have an in-house development team, who has access to this repository,
-if they write Groovy scripts yes/no, if they have their own outside repository, etc. -->
+<!-- For example:
+  - What kind of company they are (installer, manufacturer)
+  - What kind of team we're working with
+  - Whether they have an in-house development team
+  - Who has access to this repository
+  - If they write Groovy scripts yes/no
+  - If they have their own outside repository, etc. -->
 
 ## Architecture
 *(Please insert, preferably a diagram, or a short explanation of the high level architecture)*
