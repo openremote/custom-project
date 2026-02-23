@@ -18,22 +18,20 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@openremote/manager": "~1.15.1",
+    "@openremote/manager": "~1.17.3",
+    "@openremote/or-app": "~1.17.3",
+    "lit": "^3.3.1",
     "model": "workspace:*",
     "rest": "workspace:*"
   },
   "devDependencies": {
-    "@openremote/util": "~1.15.1",
-    "@rspack/cli": "~1.7.2",
-    "@rspack/core": "~1.7.2",
-    "css-loader": "^7.1.2",
-    "html-webpack-plugin": "^5.6.6",
-    "moment-locales-webpack-plugin": "^1.2.0",
-    "querystring-es3": "^0.2.1",
-    "shx": "^0.4.0",
-    "source-map-loader": "^5.0.0",
-    "ts-loader": "^9.5.4",
-    "typescript": "^5.9.3",
-    "webpack": "^5.99.8"
+    "@openremote/util": "~1.17.3",
+    "@rspack/cli": "*",
+    "@rspack/core": "*",
+    "cross-env": "*",
+    "css-loader": "*",
+    "shx": "*",
+    "ts-loader": "*",
+    "typescript": "^5.9.3"
   }
 }
