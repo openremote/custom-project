@@ -22,11 +22,11 @@
   "author": "OpenRemote",
   "license": "AGPL-3.0-or-later",
   "dependencies": {
-    "@openremote/rest": "~1.17.3",
+    "@openremote/rest": "~1.18.0",
     "model": "workspace:*"
   },
   "devDependencies": {
-    "@openremote/util": "~1.17.3",
+    "@openremote/util": "~1.18.0",
     "@rspack/core": "*",
     "typescript": "^5.9.3"
   },
