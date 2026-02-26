@@ -387,4 +387,31 @@ plugins.withType(JavaPlugin).whenPluginAdded {
     }
 }
 
+plugins.apply('com.diffplug.spotless')
+
+spotless {
+    java {
+        target '**/*.java'
+
+        googleJavaFormat()
+        licenseHeaderFile rootProject.file('tools/spotless/openremote-license-header.txt')
+        importOrder('java', 'javax', 'com', 'org')
+        removeUnusedImports()
+        formatAnnotations()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+
+    typescript {
+        target 'src/**/*.ts'
+        targetExclude(
+                'src/model.ts',
+                'src/restclient.ts'
+        )
+
+        eslint().configFile(rootProject.file('ui/.eslintrc.json')).tsconfigFile(rootProject.file('ui/tsconfig.json'))
+        licenseHeaderFile rootProject.file('tools/spotless/openremote-license-header.txt'), '(import|const|declare|export|var) '
+    }
+}
+
 // POM generator
