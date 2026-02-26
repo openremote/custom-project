@@ -82,7 +82,7 @@ services:
     <<: *awslogs
 
   postgresql:
-    image: openremote/postgresql:${POSTGRESQL_VERSION:-latest}
+    image: openremote/postgresql:${POSTGRESQL_VERSION:-latest-slim}
     restart: always
     volumes:
       - postgresql-data:/var/lib/postgresql/data
