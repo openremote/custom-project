@@ -4,6 +4,8 @@
 #
 # Please see profile/deploy.yml for configuration details for each service.
 #
+x-base: &base https://github.com/openremote/openremote.git#1.18.0:profile/deploy.yml
+
 volumes:
   manager-data:
 
@@ -11,7 +13,7 @@ services:
 
   keycloak:
     extends:
-      file: ../openremote/profile/deploy.yml
+      file: *base
       service: keycloak
     volumes:
       # Map custom themes
@@ -31,7 +33,7 @@ services:
 
   postgresql:
     extends:
-      file: ../openremote/profile/deploy.yml
+      file: *base
       service: postgresql
     volumes:
       - manager-data:/storage
@@ -41,7 +43,7 @@ services:
 
   manager:
     extends:
-      file: ../openremote/profile/deploy.yml
+      file: *base
       service: manager
     depends_on:
       postgresql:
