@@ -4,7 +4,7 @@
 #
 # Please see profile/deploy.yml for configuration details for each service.
 #
-x-base: &base https://github.com/openremote/openremote.git#1.18.0:profile/deploy.yml
+x-base: &base https://github.com/openremote/openremote.git#1.20.1:profile/deploy.yml
 
 volumes:
   manager-data:
