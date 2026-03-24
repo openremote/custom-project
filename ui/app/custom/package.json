@@ -18,14 +18,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@openremote/manager": "~1.20.1",
-    "@openremote/or-app": "~1.20.1",
+    "@openremote/manager": "~1.20.2",
+    "@openremote/or-app": "~1.20.2",
     "lit": "^3.3.1",
     "model": "workspace:*",
     "rest": "workspace:*"
   },
   "devDependencies": {
-    "@openremote/util": "~1.20.1",
+    "@openremote/util": "~1.20.2",
     "@rspack/cli": "*",
     "@rspack/core": "*",
     "cross-env": "*",
