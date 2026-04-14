@@ -15,8 +15,35 @@ dependencies {
     testImplementation "io.openremote:openremote-test:$openremoteVersion"
 }
 
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
     environment("LOGGING_CONFIG_FILE", "test/src/logging-test.properties")
+    addTestListener(new TestListener() {
+        @Override
+        void beforeSuite(TestDescriptor suite) {}
+
+        @Override
+        void afterSuite(TestDescriptor desc, TestResult result) {
+            if (desc.parent == null) { // outermost suite
+                def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)"
+                def startItem = '|  '
+                def endItem = '  |'
+                def repeatLength = startItem.length() + output.length() + endItem.length()
+
+                println '\n' +
+                        ('-' * repeatLength) + '\n' +
+                        startItem + output + endItem + '\n' +
+                        ('-' * repeatLength)
+            }
+        }
+
+        @Override
+        void beforeTest(TestDescriptor desc) {}
+
+        @Override
+        void afterTest(TestDescriptor desc, TestResult result) {
+            logger.quiet "${desc.className} > ${desc.name} took: ${(result.endTime - result.startTime)}ms"
+        }
+    })
 }
 
 test {
@@ -47,18 +74,5 @@ test {
         }
         info.events = debug.events
         info.exceptionFormat = debug.exceptionFormat
-
-        afterTest { desc, result ->
-            logger.quiet "${desc.className} > ${desc.name} took: ${(result.endTime - result.startTime)}ms"
-        }
-
-        afterSuite { desc, result ->
-            if (!desc.parent) { // will match the outermost suite
-                def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)"
-                def startItem = '|  ', endItem = '  |'
-                def repeatLength = startItem.length() + output.length() + endItem.length()
-                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
-            }
-        }
     }
 }
