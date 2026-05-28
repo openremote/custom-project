@@ -1,9 +1,6 @@
 /*
  * Copyright 2021, OpenRemote Inc.
  *
- * See the CONTRIBUTORS.txt file in the distribution for a
- * full listing of individual contributors.
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
@@ -15,9 +12,13 @@
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 package org.openremote.manager.setup.custom;
+
+import static org.openremote.model.util.MapAccess.getString;
 
 import org.openremote.manager.setup.AbstractKeycloakSetup;
 import org.openremote.model.Container;
@@ -25,33 +26,37 @@ import org.openremote.model.security.ClientRole;
 import org.openremote.model.security.Realm;
 import org.openremote.model.util.TextUtil;
 
-import static org.openremote.model.util.MapAccess.getString;
-
 public class CustomKeycloakSetup extends AbstractKeycloakSetup {
 
-    public static final String CUSTOM_USER_PASSWORD = "CUSTOM_USER_PASSWORD";
-    public static final String CUSTOM_USER_PASSWORD_DEFAULT = "custom";
-    protected final String customUserPassword;
+  public static final String CUSTOM_USER_PASSWORD = "CUSTOM_USER_PASSWORD";
+  public static final String CUSTOM_USER_PASSWORD_DEFAULT = "custom";
+  protected final String customUserPassword;
 
-    public CustomKeycloakSetup(Container container, boolean isProduction) {
-        super(container);
+  public CustomKeycloakSetup(Container container, boolean isProduction) {
+    super(container);
 
-        customUserPassword = getString(container.getConfig(), CUSTOM_USER_PASSWORD, CUSTOM_USER_PASSWORD_DEFAULT);
+    customUserPassword =
+        getString(container.getConfig(), CUSTOM_USER_PASSWORD, CUSTOM_USER_PASSWORD_DEFAULT);
 
-        if (isProduction && TextUtil.isNullOrEmpty(customUserPassword)) {
-            throw new IllegalStateException("Custom user password must be supplied in production");
-        }
+    if (isProduction && TextUtil.isNullOrEmpty(customUserPassword)) {
+      throw new IllegalStateException("Custom user password must be supplied in production");
     }
+  }
 
-    @Override
-    public void onStart() throws Exception {
-        // Create custom realm
-        Realm customRealm = createRealm("custom", "Custom", true);
+  @Override
+  public void onStart() throws Exception {
+    // Create custom realm
+    Realm customRealm = createRealm("custom", "Custom", true);
 
-        // Create user(s) for custom realm
-        createUser("custom", "custom", customUserPassword, "First", "Last", null, true, new ClientRole[] {
-            ClientRole.READ,
-            ClientRole.WRITE
-        });
-    }
+    // Create user(s) for custom realm
+    createUser(
+        "custom",
+        "custom",
+        customUserPassword,
+        "First",
+        "Last",
+        null,
+        true,
+        new ClientRole[] {ClientRole.READ, ClientRole.WRITE});
+  }
 }

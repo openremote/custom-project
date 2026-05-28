@@ -1306,7 +1306,15 @@ __metadata:
     "@rspack/core": "npm:~1.7.1"
     "@types/react": "npm:^19.2.2"
     "@types/react-dom": "npm:^19.2.2"
+    "@typescript-eslint/eslint-plugin": "npm:^5.62.0"
+    "@typescript-eslint/parser": "npm:^5.62.0"
     cross-env: "npm:^10.1.0"
+    eslint: "npm:^8.6.0"
+    eslint-config-prettier: "npm:^8.3.0"
+    eslint-config-standard: "npm:^16.0.3"
+    eslint-plugin-import: "npm:^2.25.4"
+    eslint-plugin-node: "npm:^11.1.0"
+    eslint-plugin-promise: "npm:^6.0.0"
     react: "npm:^19.2.0"
     react-dom: "npm:^19.2.0"
     react-refresh: "npm:^0.18.0"
@@ -1324,8 +1332,16 @@ __metadata:
     "@openremote/util": "npm:~1.22.1"
     "@rspack/cli": "npm:*"
     "@rspack/core": "npm:*"
+    "@typescript-eslint/eslint-plugin": "npm:^5.62.0"
+    "@typescript-eslint/parser": "npm:^5.62.0"
     cross-env: "npm:*"
     css-loader: "npm:*"
+    eslint: "npm:^8.6.0"
+    eslint-config-prettier: "npm:^8.3.0"
+    eslint-config-standard: "npm:^16.0.3"
+    eslint-plugin-import: "npm:^2.25.4"
+    eslint-plugin-node: "npm:^11.1.0"
+    eslint-plugin-promise: "npm:^6.0.0"
     lit: "npm:^3.3.1"
     model: "workspace:*"
     rest: "workspace:*"
@@ -2583,7 +2599,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.9.0":
+"@typescript-eslint/eslint-plugin@npm:^5.62.0, @typescript-eslint/eslint-plugin@npm:^5.9.0":
   version: 5.62.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.62.0"
   dependencies:
@@ -2607,7 +2623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.9.0":
+"@typescript-eslint/parser@npm:^5.62.0, @typescript-eslint/parser@npm:^5.9.0":
   version: 5.62.0
   resolution: "@typescript-eslint/parser@npm:5.62.0"
   dependencies:
@@ -7269,6 +7285,14 @@ __metadata:
   resolution: "model@workspace:ui/component/model"
   dependencies:
     "@openremote/util": "npm:~1.22.1"
+    "@typescript-eslint/eslint-plugin": "npm:^5.62.0"
+    "@typescript-eslint/parser": "npm:^5.62.0"
+    eslint: "npm:^8.6.0"
+    eslint-config-prettier: "npm:^8.3.0"
+    eslint-config-standard: "npm:^16.0.3"
+    eslint-plugin-import: "npm:^2.25.4"
+    eslint-plugin-node: "npm:^11.1.0"
+    eslint-plugin-promise: "npm:^6.0.0"
   languageName: unknown
   linkType: soft
 
@@ -8356,6 +8380,12 @@ __metadata:
     "@openremote/rest": "npm:~1.22.1"
     "@openremote/util": "npm:~1.22.1"
     "@rspack/core": "npm:*"
+    eslint: "npm:^8.6.0"
+    eslint-config-prettier: "npm:^8.3.0"
+    eslint-config-standard: "npm:^16.0.3"
+    eslint-plugin-import: "npm:^2.25.4"
+    eslint-plugin-node: "npm:^11.1.0"
+    eslint-plugin-promise: "npm:^6.0.0"
     model: "workspace:*"
     typescript: "npm:^5.9.3"
   languageName: unknown
