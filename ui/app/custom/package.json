@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "@openremote/util": "~1.25.0",
-    "@rspack/cli": "*",
-    "@rspack/core": "*",
+    "@rspack/cli": "^1.7.10",
+    "@rspack/core": "^1.7.10",
     "cross-env": "*",
     "css-loader": "*",
     "shx": "*",

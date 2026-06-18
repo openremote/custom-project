@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@openremote/util": "~1.25.0",
-    "@rspack/core": "*",
+    "@rspack/core": "^1.7.10",
     "typescript": "^5.9.3"
   },
   "publishConfig": {
