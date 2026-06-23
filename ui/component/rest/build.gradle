@@ -1,15 +1,6 @@
 apply plugin: "groovy"
 apply plugin: "cz.habarta.typescript-generator"
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "cz.habarta.typescript-generator:typescript-generator-gradle-plugin:$typescriptGeneratorVersion"
-    }
-}
-
 dependencies {
     compileOnly "io.openremote:openremote-model-util:$openremoteVersion"
     implementation project(":agent")
@@ -21,16 +12,21 @@ dependencies {
 }
 
 generateTypeScript createTSGeneratorConfigForClient("src/restclient.ts", new File("${project(":ui:component:model").projectDir}/src/typescript-generator-info.json"), project(":model"))
-generateTypeScript.dependsOn resolveTask(":ui:component:model:generateTypeScript")
-generateTypeScript.onlyIf { countResourceClasses() > 0 }
-npmBuild.onlyIf { countResourceClasses() > 0 }
+
+def generateTypeScriptTask = tasks.named("generateTypeScript") {
+    // Work around typescript-generator exposing non-serializable configuration objects as Gradle task inputs.
+    doNotTrackState("typescript-generator uses non-serializable task input types")
+    dependsOn resolveTask(":ui:component:model:generateTypeScript")
+    onlyIf { countResourceClasses() > 0 }
+    finalizedBy dummyRestClient
+}
+
 tasks.register('dummyRestClient') {
     onlyIf { countResourceClasses() == 0 }
     doLast {
         file("${projectDir}/src/restclient.ts").text = 'export class ApiClient {}'
     }
 }
-generateTypeScript.finalizedBy dummyRestClient
 
 def countResourceClasses() {
     // Get the main source set's output classes directory
@@ -66,8 +62,14 @@ clean {
     }
 }
 
-build.dependsOn generateTypeScript, npmBuild
-npmBuild.dependsOn generateTypeScript
+tasks.named("build") {
+    dependsOn generateTypeScriptTask, tasks.named("npmBuild")
+}
+
+tasks.named("npmBuild") {
+    dependsOn generateTypeScriptTask
+    onlyIf { countResourceClasses() > 0 }
+}
 
 tasks.register('npmTest', Exec) {
     dependsOn getYarnInstallTask()
