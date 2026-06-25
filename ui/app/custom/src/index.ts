@@ -1,6 +1,7 @@
 // Declare require method which we'll use for importing webpack resources (using ES6 imports will confuse typescript parser)
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import "@openremote/or-app";
+import themeCss from "@openremote/theme";
 import {AnyAction, appReducer, AppStateKeyed, HeaderConfig, HeaderItem, OrApp, PageProvider, RealmAppConfig} from "@openremote/or-app";
 import {headerItemAccount, headerItemLanguage, headerItemLogout, headerItemMap, headerItemAssets} from "@openremote/manager/headers";
 import {pageAssetsReducer, pageAssetsProvider} from "@openremote/manager/pages/page-assets";
@@ -78,5 +79,11 @@ orApp.appConfig = {
         default: {...DefaultRealmConfig, header: DefaultHeaderConfig}
     }
 };
+
+// Apply theme to the Manager app
+const style = document.createElement("style");
+style.id = "orDefaultTheme";
+style.textContent = themeCss;
+document.head.appendChild(style);
 
 document.body.appendChild(orApp);
