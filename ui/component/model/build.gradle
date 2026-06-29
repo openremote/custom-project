@@ -28,11 +28,8 @@ tasks.named("npmBuild") {
     dependsOn generateTypeScriptTask
 }
 
-clean {
-    doLast {
-        def dir = new File("${projectDir}/dist")
-        dir.deleteDir()
-    }
+tasks.named('clean', Delete) {
+    delete layout.projectDirectory.dir('dist')
 }
 
 tasks.register('npmTest', Exec) {

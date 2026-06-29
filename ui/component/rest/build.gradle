@@ -13,16 +13,18 @@ dependencies {
 
 generateTypeScript createTSGeneratorConfigForClient("src/restclient.ts", new File("${project(":ui:component:model").projectDir}/src/typescript-generator-info.json"), project(":model"))
 
+def resourceClassesCount = countResourceClasses() 
+
 def generateTypeScriptTask = tasks.named("generateTypeScript") {
     // Work around typescript-generator exposing non-serializable configuration objects as Gradle task inputs.
     doNotTrackState("typescript-generator uses non-serializable task input types")
     dependsOn resolveTask(":ui:component:model:generateTypeScript")
-    onlyIf { countResourceClasses() > 0 }
+    onlyIf { resourceClassesCount > 0 }
     finalizedBy dummyRestClient
 }
 
 tasks.register('dummyRestClient') {
-    onlyIf { countResourceClasses() == 0 }
+    onlyIf { resourceClassesCount == 0 }
     doLast {
         file("${projectDir}/src/restclient.ts").text = 'export class ApiClient {}'
     }
@@ -55,11 +57,8 @@ def countResourceClasses() {
     return count
 }
 
-clean {
-    doLast {
-        def dir = new File("${projectDir}/dist")
-        dir.deleteDir()
-    }
+tasks.named('clean', Delete) {
+    delete layout.projectDirectory.dir('dist')
 }
 
 tasks.named("build") {
