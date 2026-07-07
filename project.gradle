@@ -51,6 +51,11 @@ configurations.all {
 if (project == rootProject) {
 
     project.afterEvaluate {
+        tasks.configureEach { task ->
+            if (task.name in ['encryptFiles', 'decryptFiles']) {
+                task.notCompatibleWithConfigurationCache("GradleFileEncrypt stores javax.crypto.SecretKey/SecretKeySpec task state")
+            }
+        }
 
         if (rootProject.hasProperty("gradleFileEncrypt")) {
             println("File encryption plugin config found, configuring git pre commit hook and decrypt task dependency")
