@@ -1,5 +1,11 @@
-// Configure version based on Git tags
-apply plugin: 'pl.allegro.tech.build.axion-release'
+import static org.apache.tools.ant.taskdefs.condition.Os.FAMILY_WINDOWS
+import static org.apache.tools.ant.taskdefs.condition.Os.isFamily
+
+plugins {
+    alias libs.plugins.axionRelease
+    alias libs.plugins.fileEncrypt apply false
+}
+
 scmVersion {
     releaseOnlyOnReleaseBranches = true
     releaseBranchNames = ['main']
@@ -23,7 +29,7 @@ allprojects {
 // When using encryption the the GFE_PASSWORD environment variable must be set or the build will fail
 // use ./gradlew encryptFiles to encrypt files
 
-//apply plugin: "com.cherryperry.gradle-file-encrypt"
+//pluginManager.apply(libs.plugins.fileEncrypt.get().pluginId)
 //gradleFileEncrypt {
 //    // files to encrypt
 //    plainFiles.from("deployment/manager/fcm.json")
@@ -44,7 +50,7 @@ allprojects {
 //        def plainFiles = project.getProperties().get("gradleFileEncrypt").plainFiles
 //        plainFiles.each { plainFile ->
 //            def args = []
-//            if (org.apache.tools.ant.taskdefs.condition.Os.isFamily(org.apache.tools.ant.taskdefs.condition.Os.FAMILY_WINDOWS)) {
+//            if (isFamily(FAMILY_WINDOWS)) {
 //                args.add("cmd")
 //                args.add("/c")
 //            }

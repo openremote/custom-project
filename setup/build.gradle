@@ -1,14 +1,16 @@
-apply plugin: "java-library"
+plugins {
+    id 'java-library'
+}
 
 dependencies {
     api project(":agent")
     api project(":model")
     api project(":manager")
 
-    implementation "io.openremote.ui:openremote-insights:$openremoteVersion"
-    implementation "io.openremote.ui:openremote-manager:$openremoteVersion"
-    implementation "io.openremote.ui:openremote-shared:$openremoteVersion"
-    implementation "io.openremote.ui:openremote-swagger:$openremoteVersion"
+    implementation libs.openremote.ui.insights
+    implementation libs.openremote.ui.manager
+    implementation libs.openremote.ui.shared
+    implementation libs.openremote.ui.swagger
 }
 
 tasks.register('installDist') {

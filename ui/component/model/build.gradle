@@ -4,13 +4,13 @@ plugins {
 }
 
 dependencies {
-    compileOnly "io.openremote:openremote-model-util:$openremoteVersion"
+    compileOnly libs.openremote.model.util
     implementation project(":agent")
     implementation project(":model")
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion"
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
-    implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion"
-    implementation "cz.habarta.typescript-generator:typescript-generator-core:$typescriptGeneratorVersion"
+    implementation libs.jackson.datatype.jdk8
+    implementation libs.jackson.datatype.jsr310
+    implementation libs.jackson.module.parameter.names
+    implementation libs.typescript.generator.core
 }
 
 generateTypeScript createTSGeneratorConfigForModel("src/model.ts", findProject(":model"))

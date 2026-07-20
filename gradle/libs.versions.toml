@@ -1,0 +1,28 @@
+[versions]
+axionRelease = "1.21.2"
+fileEncrypt = "2.1.0"
+jackson = "2.21.4"
+openremote = "1.26.2"
+testLogger = "4.0.0"
+typescript-generator = "4.1.1"
+
+[libraries]
+jackson-datatype-jdk8 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jdk8", version.ref = "jackson" }
+jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
+jackson-module-parameter-names = { module = "com.fasterxml.jackson.module:jackson-module-parameter-names", version.ref = "jackson" }
+openremote-agent = { module = "io.openremote:openremote-agent", version.ref = "openremote" }
+openremote-container = { module = "io.openremote:openremote-container", version.ref = "openremote" }
+openremote-manager = { module = "io.openremote:openremote-manager", version.ref = "openremote" }
+openremote-model = { module = "io.openremote:openremote-model", version.ref = "openremote" }
+openremote-model-util = { module = "io.openremote:openremote-model-util", version.ref = "openremote" }
+openremote-test = { module = "io.openremote:openremote-test", version.ref = "openremote" }
+openremote-ui-insights = { module = "io.openremote.ui:openremote-insights", version.ref = "openremote" }
+openremote-ui-manager = { module = "io.openremote.ui:openremote-manager", version.ref = "openremote" }
+openremote-ui-shared = { module = "io.openremote.ui:openremote-shared", version.ref = "openremote" }
+openremote-ui-swagger = { module = "io.openremote.ui:openremote-swagger", version.ref = "openremote" }
+typescript-generator-core = { module = "cz.habarta.typescript-generator:typescript-generator-core", version.ref = "typescript-generator" }
+
+[plugins]
+axionRelease = { id = "pl.allegro.tech.build.axion-release", version.ref = "axionRelease" }
+fileEncrypt = { id = "io.openremote.com.cherryperry.gradle-file-encrypt", version.ref = "fileEncrypt" }
+testLogger = { id = "com.adarshr.test-logger", version.ref = "testLogger" }

@@ -1,8 +1,30 @@
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id ==
+                    'io.openremote.com.cherryperry.gradle-file-encrypt') {
+                useModule(
+                        "com.github.openremote:GradleFileEncrypt:${requested.version}"
+                )
+            }
+        }
+    }
+
+    repositories {
+        gradlePluginPortal()
+        maven {
+            url = uri('https://jitpack.io')
+        }
+   }
+}
+
+// TODO: These plugins remain here because project.gradle imports their classes,
+// and version-catalog aliases cannot be used in settings.gradle. Move the related
+// configuration into convention plugins/build logic so their versions can be
+// managed through libs.versions.toml.
 plugins {
-    id "com.cherryperry.gradle-file-encrypt" version "2.0.3" apply false
-    id "org.jetbrains.gradle.plugin.idea-ext" version "1.2" apply false
     id 'cz.habarta.typescript-generator' version "$typescriptGeneratorVersion" apply false
-    id 'pl.allegro.tech.build.axion-release' version '1.21.1' apply false
+    id 'org.jetbrains.gradle.plugin.idea-ext' version "$ideaExtPluginVersion" apply false
 }
 
 rootProject.name = "$projectName"

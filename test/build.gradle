@@ -2,17 +2,16 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    id 'com.adarshr.test-logger' version "$testLoggerVersion"
+    id 'java-library'
+    id 'groovy'
+    alias libs.plugins.testLogger
 }
-
-apply plugin: "java-library"
-apply plugin: "groovy"
 
 dependencies {
     api project(":manager")
     api project(":model")
     api project(":agent")
-    testImplementation "io.openremote:openremote-test:$openremoteVersion"
+    testImplementation libs.openremote.test
 }
 
 tasks.withType(Test).configureEach {

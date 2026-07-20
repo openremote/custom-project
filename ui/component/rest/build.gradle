@@ -1,14 +1,16 @@
-apply plugin: "groovy"
-apply plugin: "cz.habarta.typescript-generator"
+plugins {
+    id 'groovy'
+    id 'cz.habarta.typescript-generator'
+}
 
 dependencies {
-    compileOnly "io.openremote:openremote-model-util:$openremoteVersion"
+    compileOnly libs.openremote.model.util
     implementation project(":agent")
     implementation project(":model")
-    implementation "cz.habarta.typescript-generator:typescript-generator-core:$typescriptGeneratorVersion"
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion"
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
-    implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion"
+    implementation libs.typescript.generator.core
+    implementation libs.jackson.datatype.jdk8
+    implementation libs.jackson.datatype.jsr310
+    implementation libs.jackson.module.parameter.names
 }
 
 generateTypeScript createTSGeneratorConfigForClient("src/restclient.ts", new File("${project(":ui:component:model").projectDir}/src/typescript-generator-info.json"), project(":model"))
@@ -18,7 +20,7 @@ def resourceJavaFilesCount = countResourceJavaFiles()
 def generateTypeScriptTask = tasks.named("generateTypeScript") {
     // Work around typescript-generator exposing non-serializable configuration objects as Gradle task inputs.
     doNotTrackState("typescript-generator uses non-serializable task input types")
-    dependsOn resolveTask(":ui:component:model:generateTypeScript")
+    dependsOn ":ui:component:model:generateTypeScript"
     onlyIf { resourceJavaFilesCount > 0 }
     finalizedBy dummyRestClient
 }
