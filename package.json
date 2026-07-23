@@ -2,7 +2,7 @@
   "packageManager": "yarn@4.17.1",
   "private": true,
   "resolutions": {
-    "axios": "1.13.2"
+    "axios": "1.18.1"
   },
   "workspaces": [
     "ui/app/*",
