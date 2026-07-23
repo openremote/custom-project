@@ -2,7 +2,7 @@
 axionRelease = "1.21.2"
 fileEncrypt = "2.1.0"
 jackson = "2.21.4"
-openremote = "1.26.2"
+openremote = "1.27.0"
 testLogger = "4.0.0"
 typescript-generator = "4.1.1"
 
