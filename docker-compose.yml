@@ -48,11 +48,10 @@ x-logging: &awslogs
     options:
       awslogs-region: ${AWS_REGION:-eu-west-1}
       awslogs-group: ${OR_HOSTNAME}
-      awslogs-create-group: 'true'
+      awslogs-create-group: "true"
       tag: "{{.Name}}/{{.ID}}"
 
 services:
-
   # This service will only populate an empty volume on startup and then exit.
   # If the volume already contains data, it exits immediately.
   deployment:

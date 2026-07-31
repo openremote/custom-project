@@ -1,83 +1,116 @@
-// Declare require method which we'll use for importing webpack resources (using ES6 imports will confuse typescript parser)
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
+/*
+ * Copyright 2026, OpenRemote Inc.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import "@openremote/or-app";
 import themeCss from "@openremote/theme";
-import {AnyAction, appReducer, AppStateKeyed, HeaderConfig, HeaderItem, OrApp, PageProvider, RealmAppConfig} from "@openremote/or-app";
-import {headerItemAccount, headerItemLanguage, headerItemLogout, headerItemMap, headerItemAssets} from "@openremote/manager/headers";
-import {pageAssetsReducer, pageAssetsProvider} from "@openremote/manager/pages/page-assets";
-import {pageMapReducer, pageMapProvider} from "@openremote/manager/pages/page-map";
+import {
+  type AnyAction,
+  appReducer,
+  type AppStateKeyed,
+  type HeaderConfig,
+  type HeaderItem,
+  OrApp,
+  type PageProvider,
+  type RealmAppConfig,
+} from "@openremote/or-app";
+import {
+  headerItemAccount,
+  headerItemLanguage,
+  headerItemLogout,
+  headerItemMap,
+  headerItemAssets,
+} from "@openremote/manager/headers";
+import { pageAssetsReducer, pageAssetsProvider } from "@openremote/manager/pages/page-assets";
+import { pageMapReducer, pageMapProvider } from "@openremote/manager/pages/page-map";
 import "./pages/page-custom";
-import {pageCustomProvider} from "./pages/page-custom";
+import { pageCustomProvider } from "./pages/page-custom";
 
 const rootReducer = combineReducers({
-    app: appReducer,
-    map: pageMapReducer,
-    assets: pageAssetsReducer
+  app: appReducer,
+  map: pageMapReducer,
+  assets: pageAssetsReducer,
 });
 
 type RootState = ReturnType<typeof rootReducer>;
 
 export const store = configureStore({
-    reducer: rootReducer
+  reducer: rootReducer,
 });
 
 const orApp = new OrApp(store);
 
 export const DefaultPagesConfig: PageProvider<any>[] = [
-    pageMapProvider(store), // Standard manager map page
-    pageAssetsProvider(store), // Standard manager asset page
-    pageCustomProvider(store) // Custom page
+  pageMapProvider(store), // Standard manager map page
+  pageAssetsProvider(store), // Standard manager asset page
+  pageCustomProvider(store), // Custom page
 ];
 
 // A new header for our custom page
 export function headerItemCustom<S extends AppStateKeyed, A extends AnyAction>(orApp: OrApp<S>): HeaderItem {
-    return {
-        icon: "rhombus-split",
-        href: "custom1",
-        text: "app:customPage",
-    };
+  return {
+    icon: "rhombus-split",
+    href: "custom1",
+    text: "app:customPage",
+  };
 }
 
-export const DefaultHeaderMainMenu: {[name: string]: HeaderItem} = {
-    map: headerItemMap(orApp),
-    assets: headerItemAssets(orApp),
-    custom: headerItemCustom(orApp)
+export const DefaultHeaderMainMenu: { [name: string]: HeaderItem } = {
+  map: headerItemMap(orApp),
+  assets: headerItemAssets(orApp),
+  custom: headerItemCustom(orApp),
 };
 
-export const DefaultHeaderSecondaryMenu: {[name: string]: HeaderItem} = {
-    language: headerItemLanguage(orApp),
-    account: headerItemAccount(orApp),
-    logout: headerItemLogout(orApp)
+export const DefaultHeaderSecondaryMenu: { [name: string]: HeaderItem } = {
+  language: headerItemLanguage(orApp),
+  account: headerItemAccount(orApp),
+  logout: headerItemLogout(orApp),
 };
 
 export const DefaultHeaderConfig: HeaderConfig = {
-    mainMenu: Object.values(DefaultHeaderMainMenu),
-    secondaryMenu: Object.values(DefaultHeaderSecondaryMenu)
+  mainMenu: Object.values(DefaultHeaderMainMenu),
+  secondaryMenu: Object.values(DefaultHeaderSecondaryMenu),
 };
 
 export const DefaultRealmConfig: RealmAppConfig = {
-    appTitle: "Custom App",
-    header: DefaultHeaderConfig,
-    styles: ":host > * {--or-app-color2: #F0F0F0; --or-app-color3: #22211f; --or-app-color4: #e3000a; --or-app-color5: #CCCCCC;}",
+  appTitle: "Custom App",
+  header: DefaultHeaderConfig,
+  styles:
+    ":host > * {--or-app-color2: #F0F0F0; --or-app-color3: #22211f; --or-app-color4: #e3000a; --or-app-color5: #CCCCCC;}",
 };
 
 // Configure manager connection and i18next settings
 orApp.managerConfig = {
-    realm: "custom",
-    loadTranslations: ["app", "or"]
+  realm: "custom",
+  loadTranslations: ["app", "or"],
 };
 
 // Configure app pages and per realm styling/settings
 orApp.appConfig = {
-    pages: [...DefaultPagesConfig],
-    languages: {
-        en: "english",
-        nl: "dutch"
-    },
-    superUserHeader: DefaultHeaderConfig,
-    realms: {
-        default: {...DefaultRealmConfig, header: DefaultHeaderConfig}
-    }
+  pages: [...DefaultPagesConfig],
+  languages: {
+    en: "english",
+    nl: "dutch",
+  },
+  superUserHeader: DefaultHeaderConfig,
+  realms: {
+    default: { ...DefaultRealmConfig, header: DefaultHeaderConfig },
+  },
 };
 
 // Apply theme to the Manager app

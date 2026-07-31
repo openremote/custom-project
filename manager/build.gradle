@@ -1,14 +1,14 @@
 plugins {
-    id 'java-library'
+  id 'java-library'
 }
 
 dependencies {
-    api project(":agent")
-    api project(":model")
-    api libs.openremote.container
-    api libs.openremote.manager
+  api project(":agent")
+  api project(":model")
+  api libs.openremote.container
+  api libs.openremote.manager
 }
 
 tasks.register('installDist') {
-    dependsOn jar
+  dependsOn jar
 }

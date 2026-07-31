@@ -1,22 +1,22 @@
 plugins {
-    id 'java-library'
+  id 'java-library'
 }
 
 configurations {
-    developmentRuntime
+  developmentRuntime
 }
 
 dependencies {
-    api project(":agent")
-    api project(":model")
-    api project(":manager")
+  api project(":agent")
+  api project(":model")
+  api project(":manager")
 
-    developmentRuntime libs.openremote.ui.insights
-    developmentRuntime libs.openremote.ui.manager
-    developmentRuntime libs.openremote.ui.shared
-    developmentRuntime libs.openremote.ui.swagger
+  developmentRuntime libs.openremote.ui.insights
+  developmentRuntime libs.openremote.ui.manager
+  developmentRuntime libs.openremote.ui.shared
+  developmentRuntime libs.openremote.ui.swagger
 }
 
 tasks.register('installDist') {
-    dependsOn jar
+  dependsOn jar
 }
