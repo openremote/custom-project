@@ -2,26 +2,26 @@ import static org.apache.tools.ant.taskdefs.condition.Os.FAMILY_WINDOWS
 import static org.apache.tools.ant.taskdefs.condition.Os.isFamily
 
 plugins {
-    alias libs.plugins.axionRelease
-    alias libs.plugins.fileEncrypt apply false
+  alias libs.plugins.axionRelease
+  alias libs.plugins.fileEncrypt apply false
 }
 
 scmVersion {
-    releaseOnlyOnReleaseBranches = true
-    releaseBranchNames = ['main']
-    unshallowRepoOnCI.set(true)
-    versionCreator('simple')
-    repository {
-        remote.set('origin')
-    }
-    tag {
-        prefix.set('')
-    }
+  releaseOnlyOnReleaseBranches = true
+  releaseBranchNames = ['main']
+  unshallowRepoOnCI.set(true)
+  versionCreator('simple')
+  repository {
+    remote.set('origin')
+  }
+  tag {
+    prefix.set('')
+  }
 }
 
 allprojects {
-    // Apply common project setup
-    apply from: "${rootDir}/project.gradle"
+  // Apply common project setup
+  apply from: "${rootDir}/project.gradle"
 }
 
 // Uncomment the following to configure files to be encrypted/decrypted
@@ -70,4 +70,3 @@ allprojects {
 //        }
 //    }
 //}
-

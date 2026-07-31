@@ -1,16 +1,16 @@
 plugins {
-    id 'groovy'
-    id 'cz.habarta.typescript-generator'
+  id 'groovy'
+  id 'cz.habarta.typescript-generator'
 }
 
 dependencies {
-    compileOnly libs.openremote.model.util
-    implementation project(":agent")
-    implementation project(":model")
-    implementation libs.typescript.generator.core
-    implementation libs.jackson.datatype.jdk8
-    implementation libs.jackson.datatype.jsr310
-    implementation libs.jackson.module.parameter.names
+  compileOnly libs.openremote.model.util
+  implementation project(":agent")
+  implementation project(":model")
+  implementation libs.typescript.generator.core
+  implementation libs.jackson.datatype.jdk8
+  implementation libs.jackson.datatype.jsr310
+  implementation libs.jackson.module.parameter.names
 }
 
 generateTypeScript createTSGeneratorConfigForClient("src/restclient.ts", new File("${project(":ui:component:model").projectDir}/src/typescript-generator-info.json"), project(":model"))
@@ -18,53 +18,53 @@ generateTypeScript createTSGeneratorConfigForClient("src/restclient.ts", new Fil
 def resourceJavaFilesCount = countResourceJavaFiles()
 
 def generateTypeScriptTask = tasks.named("generateTypeScript") {
-    // Work around typescript-generator exposing non-serializable configuration objects as Gradle task inputs.
-    doNotTrackState("typescript-generator uses non-serializable task input types")
-    dependsOn ":ui:component:model:generateTypeScript"
-    onlyIf { resourceJavaFilesCount > 0 }
-    finalizedBy dummyRestClient
+  // Work around typescript-generator exposing non-serializable configuration objects as Gradle task inputs.
+  doNotTrackState("typescript-generator uses non-serializable task input types")
+  dependsOn ":ui:component:model:generateTypeScript"
+  onlyIf { resourceJavaFilesCount> 0 }
+  finalizedBy dummyRestClient
 }
 
 tasks.register('dummyRestClient') {
-    onlyIf { resourceJavaFilesCount == 0 }
-    doLast {
-        file("${projectDir}/src/restclient.ts").text = 'export class ApiClient {}'
-    }
+  onlyIf { resourceJavaFilesCount == 0 }
+  doLast {
+    file("${projectDir}/src/restclient.ts").text = 'export class ApiClient {}'
+  }
 }
 
 def countResourceJavaFiles() {
-    def modelProject = project(":model")
-    def sourceDir = modelProject.layout.projectDirectory.dir("src/main/java")
-    def resourceFiles = modelProject.fileTree(sourceDir) {
-        include "**/*Resource.java"
-    }
-    def count = resourceFiles.files.size()
-    println "Total Java source files ending with 'Resource': $count"
-    return count
+  def modelProject = project(":model")
+  def sourceDir = modelProject.layout.projectDirectory.dir("src/main/java")
+  def resourceFiles = modelProject.fileTree(sourceDir) {
+    include "**/*Resource.java"
+  }
+  def count = resourceFiles.files.size()
+  println "Total Java source files ending with 'Resource': $count"
+  return count
 }
 
 tasks.named('clean', Delete) {
-    delete layout.projectDirectory.dir('dist')
+  delete layout.projectDirectory.dir('dist')
 }
 
 tasks.named("build") {
-    dependsOn generateTypeScriptTask, tasks.named("npmBuild")
+  dependsOn generateTypeScriptTask, tasks.named("npmBuild")
 }
 
 tasks.named("npmBuild") {
-    dependsOn generateTypeScriptTask
-    onlyIf { resourceJavaFilesCount > 0 }
+  dependsOn generateTypeScriptTask
+  onlyIf { resourceJavaFilesCount> 0 }
 }
 
 tasks.register('npmTest', Exec) {
-    dependsOn getYarnInstallTask()
-    commandLine npmCommand("yarn"), "run", "test"
+  dependsOn getYarnInstallTask()
+  commandLine npmCommand("yarn"), "run", "test"
 }
 
 tasks.register('prepareUi') {
-    dependsOn clean, build, npmPrepare
+  dependsOn clean, build, npmPrepare
 }
 
 tasks.register('publishUi') {
-    dependsOn clean, build, npmPublish
+  dependsOn clean, build, npmPublish
 }

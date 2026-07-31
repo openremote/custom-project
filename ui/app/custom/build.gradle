@@ -5,8 +5,8 @@ tasks.register('clean') {
 }
 
 tasks.register('installDist', Copy) {
-    dependsOn npmBuild
-    mustRunAfter ":manager:installDist"
-    from project.buildDir
-    into "${project(':deployment').buildDir}/image/manager/app/${projectDir.name}"
+  dependsOn npmBuild
+  mustRunAfter ":manager:installDist"
+  from project.buildDir
+  into "${project(':deployment').buildDir}/image/manager/app/${projectDir.name}"
 }

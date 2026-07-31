@@ -1,16 +1,16 @@
 afterEvaluate {
-    // Add dependencies on model and rest typescript generation
-    rootProject.getTasksByName('prepareUi', true).forEach {
-        it.dependsOn ":ui:component:model:generateTypeScript", ":ui:component:rest:generateTypeScript"
-    }
-    rootProject.getTasksByName('publishUi', true).forEach {
-        it.dependsOn ":ui:component:model:generateTypeScript", ":ui:component:rest:generateTypeScript"
-    }
-    rootProject.getTasksByName('npmBuild', true).forEach {
-        it.dependsOn ":ui:component:model:generateTypeScript", ":ui:component:rest:generateTypeScript"
-    }
+  // Add dependencies on model and rest typescript generation
+  rootProject.getTasksByName('prepareUi', true).forEach {
+    it.dependsOn ":ui:component:model:generateTypeScript", ":ui:component:rest:generateTypeScript"
+  }
+  rootProject.getTasksByName('publishUi', true).forEach {
+    it.dependsOn ":ui:component:model:generateTypeScript", ":ui:component:rest:generateTypeScript"
+  }
+  rootProject.getTasksByName('npmBuild', true).forEach {
+    it.dependsOn ":ui:component:model:generateTypeScript", ":ui:component:rest:generateTypeScript"
+  }
 }
 
 tasks.register('modelWatch') {
-    dependsOn ":ui:component:model:build", ":ui:component:rest:build"
+  dependsOn ":ui:component:model:build", ":ui:component:rest:build"
 }

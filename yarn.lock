@@ -1343,15 +1343,15 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:8.40.0"
     "@typescript-eslint/parser": "npm:8.40.0"
     cross-env: "npm:^10.1.0"
-    eslint: "npm:^8.57.1"
-    eslint-config-prettier: "npm:^10.1.8"
-    eslint-config-standard: "npm:^17.1.0"
-    eslint-plugin-import: "npm:^2.32.0"
-    eslint-plugin-lit: "npm:^2.3.1"
-    eslint-plugin-n: "npm:^16.6.2"
-    eslint-plugin-promise: "npm:^6.6.0"
-    eslint-plugin-wc: "npm:^3.1.0"
-    prettier: "npm:^3.3.3"
+    eslint: "npm:8.57.1"
+    eslint-config-prettier: "npm:10.1.8"
+    eslint-config-standard: "npm:17.1.0"
+    eslint-plugin-import: "npm:2.32.0"
+    eslint-plugin-lit: "npm:2.3.1"
+    eslint-plugin-n: "npm:16.6.2"
+    eslint-plugin-promise: "npm:6.6.0"
+    eslint-plugin-wc: "npm:3.1.0"
+    prettier: "npm:3.9.6"
     react: "npm:^19.2.0"
     react-dom: "npm:^19.2.0"
     react-refresh: "npm:^0.18.0"
@@ -1373,17 +1373,17 @@ __metadata:
     "@typescript-eslint/parser": "npm:8.40.0"
     cross-env: "npm:*"
     css-loader: "npm:*"
-    eslint: "npm:^8.57.1"
-    eslint-config-prettier: "npm:^10.1.8"
-    eslint-config-standard: "npm:^17.1.0"
-    eslint-plugin-import: "npm:^2.32.0"
-    eslint-plugin-lit: "npm:^2.3.1"
-    eslint-plugin-n: "npm:^16.6.2"
-    eslint-plugin-promise: "npm:^6.6.0"
-    eslint-plugin-wc: "npm:^3.1.0"
+    eslint: "npm:8.57.1"
+    eslint-config-prettier: "npm:10.1.8"
+    eslint-config-standard: "npm:17.1.0"
+    eslint-plugin-import: "npm:2.32.0"
+    eslint-plugin-lit: "npm:2.3.1"
+    eslint-plugin-n: "npm:16.6.2"
+    eslint-plugin-promise: "npm:6.6.0"
+    eslint-plugin-wc: "npm:3.1.0"
     lit: "npm:^3.3.1"
     model: "workspace:*"
-    prettier: "npm:^3.3.3"
+    prettier: "npm:3.9.6"
     rest: "workspace:*"
     shx: "npm:*"
     ts-loader: "npm:*"
@@ -5474,7 +5474,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-lit@npm:2.3.1, eslint-plugin-lit@npm:^2.3.1":
+"eslint-plugin-lit@npm:2.3.1":
   version: 2.3.1
   resolution: "eslint-plugin-lit@npm:2.3.1"
   dependencies:
@@ -5486,7 +5486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-n@npm:16.6.2, eslint-plugin-n@npm:^16.6.2":
+"eslint-plugin-n@npm:16.6.2":
   version: 16.6.2
   resolution: "eslint-plugin-n@npm:16.6.2"
   dependencies:
@@ -5523,7 +5523,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-promise@npm:6.6.0, eslint-plugin-promise@npm:^6.6.0":
+"eslint-plugin-promise@npm:6.6.0":
   version: 6.6.0
   resolution: "eslint-plugin-promise@npm:6.6.0"
   peerDependencies:
@@ -5543,7 +5543,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-wc@npm:3.1.0, eslint-plugin-wc@npm:^3.1.0":
+"eslint-plugin-wc@npm:3.1.0":
   version: 3.1.0
   resolution: "eslint-plugin-wc@npm:3.1.0"
   dependencies:
@@ -5624,7 +5624,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.57.1, eslint@npm:^8.57.1":
+"eslint@npm:8.57.1":
   version: 8.57.1
   resolution: "eslint@npm:8.57.1"
   dependencies:
@@ -7917,15 +7917,15 @@ __metadata:
     "@openremote/util": "npm:~1.27.0"
     "@typescript-eslint/eslint-plugin": "npm:8.40.0"
     "@typescript-eslint/parser": "npm:8.40.0"
-    eslint: "npm:^8.57.1"
-    eslint-config-prettier: "npm:^10.1.8"
-    eslint-config-standard: "npm:^17.1.0"
-    eslint-plugin-import: "npm:^2.32.0"
-    eslint-plugin-lit: "npm:^2.3.1"
-    eslint-plugin-n: "npm:^16.6.2"
-    eslint-plugin-promise: "npm:^6.6.0"
-    eslint-plugin-wc: "npm:^3.1.0"
-    prettier: "npm:^3.3.3"
+    eslint: "npm:8.57.1"
+    eslint-config-prettier: "npm:10.1.8"
+    eslint-config-standard: "npm:17.1.0"
+    eslint-plugin-import: "npm:2.32.0"
+    eslint-plugin-lit: "npm:2.3.1"
+    eslint-plugin-n: "npm:16.6.2"
+    eslint-plugin-promise: "npm:6.6.0"
+    eslint-plugin-wc: "npm:3.1.0"
+    prettier: "npm:3.9.6"
   languageName: unknown
   linkType: soft
 
@@ -8652,15 +8652,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.3.3":
-  version: 3.9.4
-  resolution: "prettier@npm:3.9.4"
-  bin:
-    prettier: bin/prettier.cjs
-  checksum: 10/4a0dc4389d442f5aca0beb12778c90b6ceb9831940b01a1df5eba9150b5ce96fa52eda9074a10a370e732adc03e2f645597dfd8b7e3f1e94dee28df01004a0fd
-  languageName: node
-  linkType: hard
-
 "pretty-error@npm:^4.0.0":
   version: 4.0.0
   resolution: "pretty-error@npm:4.0.0"
@@ -9078,16 +9069,16 @@ __metadata:
     "@rspack/core": "npm:^1.7.10"
     "@typescript-eslint/eslint-plugin": "npm:8.40.0"
     "@typescript-eslint/parser": "npm:8.40.0"
-    eslint: "npm:^8.57.1"
-    eslint-config-prettier: "npm:^10.1.8"
-    eslint-config-standard: "npm:^17.1.0"
-    eslint-plugin-import: "npm:^2.32.0"
-    eslint-plugin-lit: "npm:^2.3.1"
-    eslint-plugin-n: "npm:^16.6.2"
-    eslint-plugin-promise: "npm:^6.6.0"
-    eslint-plugin-wc: "npm:^3.1.0"
+    eslint: "npm:8.57.1"
+    eslint-config-prettier: "npm:10.1.8"
+    eslint-config-standard: "npm:17.1.0"
+    eslint-plugin-import: "npm:2.32.0"
+    eslint-plugin-lit: "npm:2.3.1"
+    eslint-plugin-n: "npm:16.6.2"
+    eslint-plugin-promise: "npm:6.6.0"
+    eslint-plugin-wc: "npm:3.1.0"
     model: "workspace:*"
-    prettier: "npm:^3.3.3"
+    prettier: "npm:3.9.6"
     typescript: "npm:^5.9.3"
   languageName: unknown
   linkType: soft

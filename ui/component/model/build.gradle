@@ -1,46 +1,46 @@
 plugins {
-    id 'groovy'
-    id 'cz.habarta.typescript-generator'
+  id 'groovy'
+  id 'cz.habarta.typescript-generator'
 }
 
 dependencies {
-    compileOnly libs.openremote.model.util
-    implementation project(":agent")
-    implementation project(":model")
-    implementation libs.jackson.datatype.jdk8
-    implementation libs.jackson.datatype.jsr310
-    implementation libs.jackson.module.parameter.names
-    implementation libs.typescript.generator.core
+  compileOnly libs.openremote.model.util
+  implementation project(":agent")
+  implementation project(":model")
+  implementation libs.jackson.datatype.jdk8
+  implementation libs.jackson.datatype.jsr310
+  implementation libs.jackson.module.parameter.names
+  implementation libs.typescript.generator.core
 }
 
 generateTypeScript createTSGeneratorConfigForModel("src/model.ts", findProject(":model"))
 
 def generateTypeScriptTask = tasks.named("generateTypeScript") {
-    // Work around typescript-generator exposing non-serializable configuration objects as Gradle task inputs.
-    doNotTrackState("typescript-generator uses non-serializable task input types")
+  // Work around typescript-generator exposing non-serializable configuration objects as Gradle task inputs.
+  doNotTrackState("typescript-generator uses non-serializable task input types")
 }
 
 tasks.named("build") {
-    dependsOn generateTypeScriptTask, tasks.named("npmBuild")
+  dependsOn generateTypeScriptTask, tasks.named("npmBuild")
 }
 
 tasks.named("npmBuild") {
-    dependsOn generateTypeScriptTask
+  dependsOn generateTypeScriptTask
 }
 
 tasks.named('clean', Delete) {
-    delete layout.projectDirectory.dir('dist')
+  delete layout.projectDirectory.dir('dist')
 }
 
 tasks.register('npmTest', Exec) {
-    dependsOn getYarnInstallTask()
-    commandLine npmCommand("yarn"), "run", "test"
+  dependsOn getYarnInstallTask()
+  commandLine npmCommand("yarn"), "run", "test"
 }
 
 tasks.register('prepareUi') {
-    dependsOn clean, npmPrepare
+  dependsOn clean, npmPrepare
 }
 
 tasks.register('publishUi') {
-    dependsOn clean, npmPublish
+  dependsOn clean, npmPublish
 }
