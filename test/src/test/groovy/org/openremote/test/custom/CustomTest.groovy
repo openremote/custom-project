@@ -30,34 +30,34 @@ import spock.util.concurrent.PollingConditions
 
 class CustomTest extends Specification implements ManagerContainerTrait {
 
-    def "Check custom agent and protocol"() {
+  def "Check custom agent and protocol"() {
 
-        given: "expected conditions"
-        def conditions = new PollingConditions(timeout: 10, delay: 1)
+    given: "expected conditions"
+    def conditions = new PollingConditions(timeout: 10, delay: 1)
 
-        when: "the container starts"
-        def serverPort = findEphemeralPort()
-        def container = startContainer(defaultConfig(serverPort), defaultServices())
-        def assetStorageService = container.getService(AssetStorageService.class)
-        def agentService = container.getService(AgentService.class)
+    when: "the container starts"
+    def serverPort = findEphemeralPort()
+    def container = startContainer(defaultConfig(serverPort), defaultServices())
+    def assetStorageService = container.getService(AssetStorageService.class)
+    def agentService = container.getService(AgentService.class)
 
-        then: "the container should be running"
-        conditions.eventually {
-            assert container.isRunning()
-        }
+    then: "the container should be running"
+    conditions.eventually {
+      assert container.isRunning()
+    }
 
-        when: "a custom agent asset is added"
-        def agent = new CustomAgent("Test Agent")
+    when: "a custom agent asset is added"
+    def agent = new CustomAgent("Test Agent")
             .setRealm(Constants.MASTER_REALM)
             .setOption(CustomAgent.Option.TWO)
 
-        and: "the agent is added to the asset service"
-        agent = assetStorageService.merge(agent)
+    and: "the agent is added to the asset service"
+    agent = assetStorageService.merge(agent)
 
-        then: "the agent should be started"
-        conditions.eventually {
-            assert agentService.protocolInstanceMap.get(agent.id) != null
-            assert (agentService.protocolInstanceMap.get(agent.id) as CustomProtocol).running
-        }
+    then: "the agent should be started"
+    conditions.eventually {
+      assert agentService.protocolInstanceMap.get(agent.id) != null
+      assert (agentService.protocolInstanceMap.get(agent.id) as CustomProtocol).running
     }
+  }
 }
