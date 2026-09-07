@@ -1,3 +1,5 @@
+import java.nio.file.Paths
+
 import static org.apache.tools.ant.taskdefs.condition.Os.FAMILY_WINDOWS
 import static org.apache.tools.ant.taskdefs.condition.Os.isFamily
 
@@ -44,29 +46,38 @@ allprojects {
 //        return password.toCharArray()
 //    }
 //}
+//
+//interface InjectedExecOps {
+//  @Inject
+//  ExecOperations getExecOps()
+//}
+//def encryptedPlainFiles = gradleFileEncrypt.plainFiles.files.collect { it.path }
 //tasks.register('checkFilesGitIgnoredNew') {
-//    doLast {
-//        // The provided checkFilesGitIgnored task doesn't work on Windows so here's one that does
-//        def plainFiles = project.getProperties().get("gradleFileEncrypt").plainFiles
-//        plainFiles.each { plainFile ->
-//            def args = []
-//            if (isFamily(FAMILY_WINDOWS)) {
-//                args.add("cmd")
-//                args.add("/c")
-//            }
-//            args.add("git")
-//            args.add("check-ignore")
-//            args.add("-q")
-//            args.add(plainFile) // Assuming plainFile is a single file path
+//  def injected = objects.newInstance(InjectedExecOps)
 //
-//            def result = project.exec {
-//                commandLine args
-//                ignoreExitValue = true // Allow the build to continue so we can check the exit value
-//            }
+//  inputs.files(gradleFileEncrypt.plainFiles)
 //
-//            if (result.exitValue != 0) {
-//                throw new GradleException("Command execution failed for file ${plainFile} with exit code: ${result.exitValue}")
-//            }
-//        }
+//  doLast {
+//    // The provided checkFilesGitIgnored task doesn't work on Windows so here's one that does
+//    encryptedPlainFiles.each { plainFile ->
+//      def args = []
+//      if (isFamily(FAMILY_WINDOWS)) {
+//        args.add("cmd")
+//        args.add("/c")
+//      }
+//      args.add("git")
+//      args.add("check-ignore")
+//      args.add("-q")
+//      args.add(plainFile)
+//
+//      def result = injected.execOps.exec {
+//        commandLine args
+//        ignoreExitValue = true
+//      }
+//
+//      if (result.exitValue != 0) {
+//        throw new GradleException("Command execution failed for file ${plainFile} with exit code: ${result.exitValue}")
+//      }
 //    }
+//  }
 //}
