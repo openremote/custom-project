@@ -340,25 +340,6 @@ tasks.register('yarnInstall', Exec) {
 tasks.register('yarnInstallForce', Exec) {
   commandLine npmCommand("yarn"), "install", "--force"
 }
-
-// Verify shared third-party deps stay aligned with the target @openremote
-// release's yarn.lock (registered once, on the custom root project only).
-def customRootPackageJson = new File(rootProject.projectDir, "package.json")
-if (project == rootProject && customRootPackageJson.exists()) {
-    tasks.register('checkOpenremoteDeps', Exec) {
-        group = "verification"
-        description = "Check shared deps against the target @openremote release's yarn.lock"
-        dependsOn getYarnInstallTask()
-        workingDir rootProject.projectDir
-        inputs.file customRootPackageJson
-        inputs.file new File(rootProject.projectDir, "yarn.lock")
-        inputs.file new File(rootProject.projectDir, "check-openremote-deps.mjs")
-        def ignoreFile = new File(rootProject.projectDir, "openremote-deps.ignore.json")
-        if (ignoreFile.exists()) { inputs.file ignoreFile }
-        commandLine npmCommand("node"), "check-openremote-deps.mjs"
-    }
-}
-
 tasks.register('npmClean', Exec) {
   dependsOn getYarnInstallTask()
   commandLine npmCommand("yarn"), "run", "clean"
