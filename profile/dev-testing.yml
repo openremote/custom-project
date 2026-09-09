@@ -4,27 +4,18 @@
 #
 # Please see profile/deploy.yml for configuration details for each service.
 #
-x-base: &base https://github.com/openremote/openremote.git#1.28.1:profile/deploy.yml
+x-base: &base https://github.com/openremote/openremote.git#1.30.0:profile/deploy.yml
 
 services:
   keycloak:
     extends:
       file: *base
       service: keycloak
-    volumes:
-      # Map custom themes
-      - ../deployment:/deployment
-    # Access directly if needed on localhost
     ports:
       - "8081:8080"
     depends_on:
       postgresql:
         condition: service_healthy
-    environment:
-      KC_HOSTNAME_STRICT_HTTPS: "false"
-      KC_HOSTNAME_PORT: ${KC_HOSTNAME_PORT:-8080}
-      # Prevent theme caching during dev
-      KEYCLOAK_START_OPTS: --spi-theme-static-max-age=-1 --spi-theme-cache-themes=false --spi-theme-cache-templates=false
 
   postgresql:
     extends:
@@ -32,6 +23,5 @@ services:
       service: postgresql
     volumes:
       - ../openremote/tmp:/storage
-    # Access directly if needed on localhost
     ports:
       - "5432:5432"

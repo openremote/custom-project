@@ -340,7 +340,6 @@ tasks.register('yarnInstall', Exec) {
 tasks.register('yarnInstallForce', Exec) {
   commandLine npmCommand("yarn"), "install", "--force"
 }
-
 tasks.register('npmClean', Exec) {
   dependsOn getYarnInstallTask()
   commandLine npmCommand("yarn"), "run", "clean"
