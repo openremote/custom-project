@@ -81,7 +81,7 @@ _(Please describe the steps necessary to run this custom project locally.)_
 In the `profile` directory you can find different Docker Compose files, each serving a different purpose. To be able to use them, you'll need to download a copy of the `deploy.yml` file from the main OpenRemote repository and place it in the `openremote/profile` directory, to ensure you always have the latest version of the file:
 
 ```bash
-mkdir -p openremote/profile && curl -L https://github.com/openremote/openremote/raw/refs/heads/master/profile/deploy.yml -o openremote/profile/deploy.yml
+mkdir -p openremote/profile && curl -L https://github.com/openremote/core/raw/refs/heads/main/profile/deploy.yml -o openremote/profile/deploy.yml
 ```
 
 ### Environment variables
@@ -95,7 +95,7 @@ mkdir -p openremote/profile && curl -L https://github.com/openremote/openremote/
 | `KEYCLOAK_VERSION`   | `keycloak`            | The Keycloak version in use.                                                                                                      | 'latest' |
 | `PROXY_VERSION`      | `proxy`               | The HAProxy version in use.                                                                                                       | 'latest' |
 
-A list of all environment variables from OpenRemote can be found [here](https://github.com/openremote/openremote/blob/master/profile/deploy.yml).
+A list of all environment variables from OpenRemote can be found [here](https://github.com/openremote/core/blob/main/profile/deploy.yml).
 <!-- Feel free to add additional chapters on developer information such as local gateway setup, encrypted files in the repository, etc. -->
 
 ## Deployments / environments
