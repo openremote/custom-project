@@ -1,6 +1,6 @@
 ## Manager customisation
 
-As well as the below information please see the [Manager endpoints and file paths](https://github.com/openremote/openremote/wiki/Architecture:-Manager-endpoints-and-file-paths) wiki.
+As well as the below information please see the [Manager endpoints and file paths](https://docs.openremote.io/docs/architecture/manager-endpoints-and-file-paths/) documentation.
 
 ### Custom provisioning files (`provisioning/`)
 
@@ -20,7 +20,7 @@ This is where your Firebase cloud messaging config file should be placed to enab
 
 ### Logging Configuration (`logging.properties`)
 
-Custom `JUL` logging configuration file; default log file can be found [here](https://github.com/openremote/openremote/blob/master/manager/src/main/resources/logging.properties).
+Custom `JUL` logging configuration file; default log file can be found [here](https://github.com/openremote/core/blob/main/manager/src/main/resources/logging.properties).
 
 ### Keycloak Credentials (`keycloak.json`)
 
