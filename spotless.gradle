@@ -49,7 +49,9 @@ def prettierIgnorePatterns = readIgnorePatterns(rootProject.file('ui/.prettierig
 def backendTarget = { Collection<String> includes, Collection<String> excludes = [] ->
   rootProject.fileTree(rootProject.projectDir) {
     includes.each { include it }
-    (prettierIgnorePatterns + excludes + ['ui/**'] + ['openremote/**']).each { exclude it }
+    (prettierIgnorePatterns + excludes + ['ui/**'] + ['openremote/**'] + ['core/**']).each {
+      exclude it
+    }
   }
 }
 def uiTarget = { Collection<String> includes, Collection<String> excludes = [] ->
