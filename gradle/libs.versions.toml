@@ -4,7 +4,7 @@ fileEncrypt = "2.1.0"
 jackson = "2.21.4"
 openremote = "1.30.0"
 testLogger = "4.0.0"
-typescript-generator = "4.1.1"
+typescript-generator = "4.2.1"
 
 [libraries]
 jackson-datatype-jdk8 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jdk8", version.ref = "jackson" }
