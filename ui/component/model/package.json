@@ -2,17 +2,15 @@
   "name": "model",
   "version": "1.0.0",
   "description": "Model Types",
-  "main": "dist/umd/index.bundle.js",
-  "module": "lib/index.js",
+  "module": "build/lib/index.js",
   "private": true,
   "exports": {
-    ".": "./lib/index.js",
-    "./*": "./lib/*.js"
+    ".": "./build/lib/index.js",
+    "./*": "./build/lib/*.js"
   },
-  "types": "lib/index.d.ts",
+  "types": "build/lib/index.d.ts",
   "files": [
-    "lib",
-    "dist"
+    "build/lib/**"
   ],
   "scripts": {
     "build": "npx tsc -b --force",

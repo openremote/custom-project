@@ -1,12 +1,10 @@
-buildDir = "dist"
-
-tasks.register('clean') {
-  dependsOn npmClean
+tasks.register('clean', Delete) {
+  delete layout.buildDirectory
 }
 
 tasks.register('installDist', Copy) {
   dependsOn npmBuild
   mustRunAfter ":manager:installDist"
-  from project.buildDir
+  from layout.buildDirectory.dir("dist")
   into "${project(':deployment').buildDir}/image/manager/app/${projectDir.name}"
 }

@@ -2,17 +2,17 @@
   "name": "rest",
   "version": "1.0.0",
   "description": "REST API",
-  "main": "dist/umd/index.bundle.js",
+  "main": "build/dist/umd/index.bundle.js",
   "private": true,
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "module": "build/lib/index.js",
+  "types": "build/lib/index.d.ts",
   "exports": {
-    ".": "./lib/index.js",
-    "./*": "./lib/*.js"
+    ".": "./build/lib/index.js",
+    "./*": "./build/lib/*.js"
   },
   "files": [
-    "lib",
-    "dist"
+    "build/lib/**",
+    "build/dist/**"
   ],
   "scripts": {
     "build": "npx tsc -b",
@@ -39,7 +39,9 @@
     "eslint-plugin-promise": "6.6.0",
     "eslint-plugin-wc": "3.1.0",
     "prettier": "3.9.6",
-    "typescript": "^5.9.3"
+    "ts-loader": "~9.5.2",
+    "typescript": "^5.9.3",
+    "webpack": "^5.108.3"
   },
   "publishConfig": {
     "access": "restricted"

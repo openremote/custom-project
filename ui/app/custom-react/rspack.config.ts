@@ -16,6 +16,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
+import { resolve } from "node:path";
 import { defineConfig } from "@rspack/cli";
 import { rspack } from "@rspack/core";
 
@@ -93,7 +94,8 @@ export default defineConfig({
     ],
   },
   output: {
-    publicPath: isDev ? "/custom-react/" : "/",
+    path: resolve(__dirname, "build/dist"),
+    publicPath: isDev ? "/custom-react/" : "./",
   },
   experiments: {
     css: true,

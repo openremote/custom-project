@@ -27,4 +27,10 @@ bundles = {
   },
 };
 
-module.exports = util.generateExports(__dirname);
+module.exports = util.generateExports(__dirname).map((config) => {
+  config.output.library = {
+    name: config.output.library.name,
+    type: "umd",
+  };
+  return config;
+});

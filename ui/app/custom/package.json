@@ -6,14 +6,14 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "exports": {
-    "./*": "./lib/*.js"
+    "./*": "./build/lib/*.js"
   },
   "scripts": {
-    "clean": "npx tsc -b --clean && npx shx rm -rf dist",
+    "clean": "npx tsc -b --clean && npx shx rm -rf build",
     "modelBuild": "npx orutil build",
     "modelWatch": "npx orutil watch",
     "build": "npx cross-env NODE_OPTIONS=--max_old_space_size=4096 rspack --mode production",
-    "serve": "npx tsc -b --clean && npx shx rm -rf dist && npx orutil build && npx cross-env NODE_OPTIONS=--max_old_space_size=4096 rspack serve --mode development",
+    "serve": "npx tsc -b --clean && npx shx rm -rf build && npx orutil build && npx cross-env NODE_OPTIONS=--max_old_space_size=4096 rspack serve --mode development",
     "serveNoModelBuild": "npx tsc -b --clean && npx cross-env NODE_OPTIONS=--max_old_space_size=4096 rspack serve --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

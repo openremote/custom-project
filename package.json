@@ -8,7 +8,9 @@
     "format:check": "cd ui && prettier . --check"
   },
   "resolutions": {
-    "axios": "1.18.1"
+    "axios": "1.18.1",
+    "@rspack/core": "1.7.10",
+    "@rspack/cli": "1.7.10"
   },
   "workspaces": [
     "ui/app/*",
@@ -16,6 +18,7 @@
     "ui/demo/*"
   ],
   "devDependencies": {
+    "@types/node": "^24",
     "@typescript-eslint/eslint-plugin": "8.40.0",
     "@typescript-eslint/parser": "8.40.0",
     "eslint": "8.57.1",

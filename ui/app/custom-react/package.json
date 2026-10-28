@@ -6,7 +6,7 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "scripts": {
-    "clean": "npx tsc -b --clean && npx shx rm -rf dist",
+    "clean": "npx tsc -b --clean && npx shx rm -rf build",
     "build": "npx cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 rspack build",
     "serve": "npx cross-env NODE_ENV=development NODE_OPTIONS=--max_old_space_size=4096 rspack serve"
   },
