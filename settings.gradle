@@ -2,10 +2,10 @@ pluginManagement {
   resolutionStrategy {
     eachPlugin {
       if (requested.id.id ==
-      'io.openremote.com.cherryperry.gradle-file-encrypt') {
+              'io.openremote.com.cherryperry.gradle-file-encrypt') {
         useModule(
                 "com.github.openremote:GradleFileEncrypt:${requested.version}"
-                )
+        )
       }
     }
   }
@@ -50,7 +50,7 @@ fileTree(
         .filter { !new File(it.parentFile, ".buildignore").exists() }
         .each {
           include it.parentFile.canonicalPath
-          .replace(rootDir.canonicalPath, "")
-          .replace("\\", ":")
-          .replace("/", ":")
+                  .replace(rootDir.canonicalPath, "")
+                  .replace("\\", ":")
+                  .replace("/", ":")
         }
