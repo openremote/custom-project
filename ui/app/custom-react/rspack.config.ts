@@ -54,6 +54,11 @@ export default defineConfig({
         type: "asset/source",
       },
       {
+        test: /\.css$/,
+        exclude: /(maplibre|mapbox|@material|gridstack|@mdi).*\.css$/,
+        type: "css/auto",
+      },
+      {
         test: /\.tsx$/,
         type: "javascript/auto",
         use: [
@@ -96,8 +101,5 @@ export default defineConfig({
   output: {
     path: resolve(__dirname, "build/dist"),
     publicPath: isDev ? "/custom-react/" : "./",
-  },
-  experiments: {
-    css: true,
   },
 });

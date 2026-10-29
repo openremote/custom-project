@@ -7,11 +7,6 @@
     "format": "cd ui && prettier . --write",
     "format:check": "cd ui && prettier . --check"
   },
-  "resolutions": {
-    "axios": "1.18.1",
-    "@rspack/core": "1.7.10",
-    "@rspack/cli": "1.7.10"
-  },
   "workspaces": [
     "ui/app/*",
     "ui/component/*",

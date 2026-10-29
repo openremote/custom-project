@@ -27,7 +27,8 @@
   },
   "devDependencies": {
     "@openremote/util": "~1.33.0",
-    "@rspack/core": "^1.7.10",
+    "@rspack/cli": "~2.1.10",
+    "@rspack/core": "~2.1.10",
     "@typescript-eslint/eslint-plugin": "8.40.0",
     "@typescript-eslint/parser": "8.40.0",
     "eslint": "8.57.1",
