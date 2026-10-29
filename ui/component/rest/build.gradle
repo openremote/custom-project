@@ -43,10 +43,6 @@ def countResourceJavaFiles() {
   return count
 }
 
-tasks.named('clean', Delete) {
-  delete layout.projectDirectory.dir('dist')
-}
-
 tasks.named("build") {
   dependsOn generateTypeScriptTask, tasks.named("npmBuild")
 }

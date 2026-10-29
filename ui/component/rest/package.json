@@ -2,17 +2,17 @@
   "name": "rest",
   "version": "1.0.0",
   "description": "REST API",
-  "main": "dist/umd/index.bundle.js",
+  "main": "build/dist/umd/index.bundle.js",
   "private": true,
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "module": "build/lib/index.js",
+  "types": "build/lib/index.d.ts",
   "exports": {
-    ".": "./lib/index.js",
-    "./*": "./lib/*.js"
+    ".": "./build/lib/index.js",
+    "./*": "./build/lib/*.js"
   },
   "files": [
-    "lib",
-    "dist"
+    "build/lib/**",
+    "build/dist/**"
   ],
   "scripts": {
     "build": "npx tsc -b",
@@ -22,12 +22,13 @@
   "author": "OpenRemote",
   "license": "AGPL-3.0-or-later",
   "dependencies": {
-    "@openremote/rest": "~1.30.0",
+    "@openremote/rest": "~1.33.0",
     "model": "workspace:*"
   },
   "devDependencies": {
-    "@openremote/util": "~1.30.0",
-    "@rspack/core": "^1.7.10",
+    "@openremote/util": "~1.33.0",
+    "@rspack/cli": "~2.1.10",
+    "@rspack/core": "~2.1.10",
     "@typescript-eslint/eslint-plugin": "8.40.0",
     "@typescript-eslint/parser": "8.40.0",
     "eslint": "8.57.1",
@@ -39,7 +40,9 @@
     "eslint-plugin-promise": "6.6.0",
     "eslint-plugin-wc": "3.1.0",
     "prettier": "3.9.6",
-    "typescript": "^5.9.3"
+    "ts-loader": "~9.5.2",
+    "typescript": "^5.9.3",
+    "webpack": "^5.108.3"
   },
   "publishConfig": {
     "access": "restricted"

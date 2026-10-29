@@ -1,0 +1,21 @@
+name: Staging
+
+on:
+  # Push excluding tags and workflow changes
+  push:
+    branches:
+      - "main"
+    tags-ignore:
+      - "*.*"
+    paths-ignore:
+      - ".github/**"
+      - ".ci_cd/**"
+      - "**/*.md"
+
+jobs:
+  call-main-repo:
+    name: CI/CD
+    uses: openremote/core/.github/workflows/custom-staging.yml@1.33.0
+    with:
+      INPUTS: ${{ toJSON(github.event.inputs) }}
+    secrets: inherit

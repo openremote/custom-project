@@ -4,7 +4,7 @@
 #
 # Please see profile/deploy.yml for configuration details for each service.
 #
-x-base: &base https://github.com/openremote/core.git#1.30.0:profile/deploy.yml
+x-base: &base https://github.com/openremote/core.git#1.33.0:profile/deploy.yml
 
 services:
   keycloak:
@@ -16,6 +16,9 @@ services:
     depends_on:
       postgresql:
         condition: service_healthy
+    environment:
+      # manager has a different base URL and is assumed to be reachable at this URL
+      OR_MANAGER_URL: ${OR_MANAGER_URL:-http://127.0.0.1:8080}
 
   postgresql:
     extends:

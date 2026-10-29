@@ -1,0 +1,13 @@
+# This just references the CI/CD workflow in the Core OpenRemote repo
+name: Review
+
+on:
+  pull_request:
+
+jobs:
+  call-main-repo:
+    name: CI/CD
+    uses: openremote/core/.github/workflows/custom-review.yml@1.33.0
+    with:
+      INPUTS: ${{ toJSON(github.event.inputs) }}
+    secrets: inherit

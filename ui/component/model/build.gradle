@@ -28,10 +28,6 @@ tasks.named("npmBuild") {
   dependsOn generateTypeScriptTask
 }
 
-tasks.named('clean', Delete) {
-  delete layout.projectDirectory.dir('dist')
-}
-
 tasks.register('npmTest', Exec) {
   dependsOn getYarnInstallTask()
   commandLine npmCommand("yarn"), "run", "test"

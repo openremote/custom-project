@@ -1,0 +1,24 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      ENVIRONMENT:
+        description: "Environment to use (if any)"
+      CLEAN_INSTALL:
+        description: "Delete data before starting"
+        type: boolean
+      COMMIT:
+        description: "Repo branch or commit SHA to checkout"
+      OR_HOSTNAME:
+        description: "Host to deploy to (e.g. demo.openremote.app)"
+      OR_ADMIN_PASSWORD:
+        description: "Admin password override"
+
+jobs:
+  call-main-repo:
+    name: CI/CD
+    uses: openremote/core/.github/workflows/custom-deploy.yml@1.33.0
+    with:
+      INPUTS: ${{ toJSON(github.event.inputs) }}
+    secrets: inherit

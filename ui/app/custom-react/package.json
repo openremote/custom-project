@@ -6,20 +6,21 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "scripts": {
-    "clean": "npx tsc -b --clean && npx shx rm -rf dist",
+    "clean": "npx tsc -b --clean && npx shx rm -rf build",
     "build": "npx cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 rspack build",
     "serve": "npx cross-env NODE_ENV=development NODE_OPTIONS=--max_old_space_size=4096 rspack serve"
   },
   "dependencies": {
-    "@openremote/core": "~1.30.0",
-    "@openremote/model": "~1.30.0",
-    "@openremote/or-mwc-components": "~1.30.0",
+    "@openremote/core": "~1.33.0",
+    "@openremote/model": "~1.33.0",
+    "@openremote/or-mwc-components": "~1.33.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@rspack/cli": "^1.7.10",
-    "@rspack/core": "^1.7.10",
+    "@rspack/cli": "~2.1.10",
+    "@rspack/core": "~2.1.10",
+    "@rspack/dev-server": "~2.1.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@typescript-eslint/eslint-plugin": "8.40.0",

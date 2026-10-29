@@ -7,15 +7,13 @@
     "format": "cd ui && prettier . --write",
     "format:check": "cd ui && prettier . --check"
   },
-  "resolutions": {
-    "axios": "1.18.1"
-  },
   "workspaces": [
     "ui/app/*",
     "ui/component/*",
     "ui/demo/*"
   ],
   "devDependencies": {
+    "@types/node": "^24",
     "@typescript-eslint/eslint-plugin": "8.40.0",
     "@typescript-eslint/parser": "8.40.0",
     "eslint": "8.57.1",

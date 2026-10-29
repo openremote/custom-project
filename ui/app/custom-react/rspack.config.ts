@@ -16,6 +16,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
+import { resolve } from "node:path";
 import { defineConfig } from "@rspack/cli";
 import { rspack } from "@rspack/core";
 
@@ -51,6 +52,11 @@ export default defineConfig({
       {
         test: /(maplibre|mapbox|@material|gridstack|@mdi).*\.css$/, // output css as strings
         type: "asset/source",
+      },
+      {
+        test: /\.css$/,
+        exclude: /(maplibre|mapbox|@material|gridstack|@mdi).*\.css$/,
+        type: "css/auto",
       },
       {
         test: /\.tsx$/,
@@ -93,9 +99,7 @@ export default defineConfig({
     ],
   },
   output: {
-    publicPath: isDev ? "/custom-react/" : "/",
-  },
-  experiments: {
-    css: true,
+    path: resolve(__dirname, "build/dist"),
+    publicPath: isDev ? "/custom-react/" : "./",
   },
 });
