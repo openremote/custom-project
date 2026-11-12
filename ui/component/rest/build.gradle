@@ -17,7 +17,7 @@ generateTypeScript createTSGeneratorConfigForClient("src/restclient.ts", new Fil
 
 def resourceJavaFilesCount = countResourceJavaFiles()
 
-def generateTypeScriptTask = tasks.named("generateTypeScript") {
+tasks.named("generateTypeScript") {
   // Work around typescript-generator exposing non-serializable configuration objects as Gradle task inputs.
   doNotTrackState("typescript-generator uses non-serializable task input types")
   dependsOn ":ui:component:model:generateTypeScript"
@@ -43,24 +43,23 @@ def countResourceJavaFiles() {
   return count
 }
 
-tasks.named("build") {
-  dependsOn generateTypeScriptTask, tasks.named("npmBuild")
-}
-
-tasks.named("npmBuild") {
-  dependsOn generateTypeScriptTask
+tasks.register('npmBuild', Exec) {
   onlyIf { resourceJavaFilesCount> 0 }
+  mustRunAfter npmClean
+  dependsOn getYarnInstallTask()
+  commandLine npmCommand("yarn"), "run", "build"
 }
 
 tasks.register('npmTest', Exec) {
   dependsOn getYarnInstallTask()
   commandLine npmCommand("yarn"), "run", "test"
+  args((findProperty('args')?.toString()?.tokenize()) ?: [])
 }
 
 tasks.register('prepareUi') {
-  dependsOn clean, build, npmPrepare
+  dependsOn clean, assemble, npmPrepare
 }
 
 tasks.register('publishUi') {
-  dependsOn clean, build, npmPublish
+  dependsOn clean, assemble, npmPublish
 }

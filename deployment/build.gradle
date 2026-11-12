@@ -12,22 +12,9 @@ dependencies {
   managerRuntime libs.openremote.manager
 }
 
-tasks.register('license') {
-  doLast {
-    def licenseFiles = new ArrayList<>()
-    licenseFiles.add("${rootDir}/LICENSE.txt")
-
-    def toConcatenate = files(licenseFiles.toArray())
-    def outputFileName = "${buildDir}/image/manager/app/LICENSE.txt"
-    def output = new File(outputFileName)
-    if (output.exists()) {
-      output.delete()
-    }
-    output.getParentFile().mkdirs()
-    output.createNewFile()
-    output.write('') // truncate output if needed
-    toConcatenate.each { f -> output << f.text }
-  }
+tasks.register('license', Copy) {
+  from(rootProject.layout.projectDirectory.file("LICENSE.txt"))
+  into(layout.buildDirectory.dir("image/manager/app"))
 }
 
 tasks.register('installDist', Copy) {
@@ -36,6 +23,8 @@ tasks.register('installDist', Copy) {
     // Don't create circular dependency
     it.project != project
   })
+
+  dependsOn tasks.named('license')
 
   into("$buildDir")
 
@@ -59,4 +48,10 @@ tasks.register('installDist', Copy) {
       it.file.name
     }
   }
+}
+
+// installDist writes into build/, which also contains the deployment JAR's inputs.
+// Keep the tasks ordered when assembling and installing in the same invocation.
+tasks.named('jar') {
+  mustRunAfter tasks.named('installDist')
 }

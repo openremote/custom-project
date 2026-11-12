@@ -4,6 +4,7 @@ import static org.apache.tools.ant.taskdefs.condition.Os.FAMILY_WINDOWS
 import static org.apache.tools.ant.taskdefs.condition.Os.isFamily
 
 plugins {
+  id 'base'
   alias libs.plugins.axionRelease
   alias libs.plugins.fileEncrypt apply false
 }
@@ -24,6 +25,98 @@ scmVersion {
 allprojects {
   // Apply common project setup
   apply from: "${rootDir}/project.gradle"
+}
+
+// build combines assemble (backend and UI artifacts) and check (tests and Spotless).
+// installDist prepares the deployment without running verification.
+tasks.register('testBackendUnit') {
+  group = 'verification'
+  description = 'Runs backend unit tests'
+}
+
+tasks.register('testBackendIntegration') {
+  group = 'verification'
+  description = 'Runs backend integration tests'
+}
+
+tasks.register('testBackend') {
+  group = 'verification'
+  description = 'Runs backend unit tests followed by backend integration tests'
+  dependsOn tasks.named('testBackendUnit'), tasks.named('testBackendIntegration')
+}
+
+tasks.register('testUiComponent') {
+  group = 'verification'
+  description = 'Runs UI component tests'
+}
+
+tasks.register('testUiApp') {
+  group = 'verification'
+  description = 'Runs UI app end-to-end tests'
+}
+
+tasks.register('testUi') {
+  group = 'verification'
+  description = 'Runs UI component tests followed by UI app end-to-end tests'
+  dependsOn tasks.named('testUiComponent'), tasks.named('testUiApp')
+}
+
+tasks.register('test') {
+  group = 'verification'
+  description = 'Runs testBackend followed by testUi for all backend and UI tests'
+  dependsOn tasks.named('testBackend'), tasks.named('testUi')
+}
+
+tasks.named('assemble') {
+  dependsOn subprojects.collect { it.tasks.matching { t -> t.name == 'assemble' } }
+}
+
+tasks.named('check') {
+  dependsOn tasks.named('test')
+  dependsOn subprojects.collect { it.tasks.matching { t -> t.name == 'check' } }
+}
+
+gradle.projectsEvaluated {
+  def unitTests = subprojects.findAll { it.path != ':test' && !it.path.startsWith(':ui') }
+  .collect { it.tasks.matching { t -> t.name == 'test' } }
+
+  def integrationTests = subprojects.findAll { it.path == ':test' }
+  .collect { it.tasks.matching { t -> t.name == 'test' } }
+
+  def uiComponentTests = subprojects.findAll { it.path.startsWith(':ui:component') }
+  .collect { it.tasks.matching { t -> t.name == 'npmTest' } }
+
+  def uiAppTests = subprojects.findAll { it.path.startsWith(':ui:app') }
+  .collect { it.tasks.matching { t -> t.name == 'npmTest' } }
+
+  tasks.named('testBackendUnit').configure {
+    dependsOn unitTests
+  }
+
+  tasks.named('testBackendIntegration').configure {
+    dependsOn integrationTests
+  }
+
+  tasks.named('testUiComponent').configure {
+    dependsOn uiComponentTests
+  }
+
+  tasks.named('testUiApp').configure {
+    dependsOn uiAppTests
+  }
+
+  // Order test execution without making standalone UI test commands run backend tests.
+  integrationTests.forEach { group ->
+    group.configureEach { it.mustRunAfter(unitTests) }
+  }
+
+  uiComponentTests.forEach { group ->
+    group.configureEach { it.mustRunAfter(unitTests, integrationTests) }
+  }
+
+  uiAppTests.forEach { group ->
+    group.configureEach { it.mustRunAfter(unitTests, integrationTests, uiComponentTests) }
+  }
 }
 
 // Uncomment the following to configure files to be encrypted/decrypted
