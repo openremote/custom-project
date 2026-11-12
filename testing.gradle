@@ -97,14 +97,11 @@ gradle.projectsEvaluated {
 }
 
 dependencies {
-  subprojects.forEach { subproject ->
-    if (subproject.path.startsWith(':ui')) return
-      subproject.pluginManager.withPlugin('java') {
-        // Aggregate unit test results spread over different projects
-        if (subproject.path != ':test') {
-          testReportAggregation project(subproject.path)
-        }
-      }
+  subprojects.findAll { !it.path.startsWith(':ui') && it.path != ':test' }.each { subproject ->
+    subproject.pluginManager.withPlugin('java') {
+      // Aggregate unit test results spread over different projects
+      testReportAggregation project(subproject.path)
+    }
   }
 }
 
