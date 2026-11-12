@@ -5,6 +5,7 @@ import static org.apache.tools.ant.taskdefs.condition.Os.isFamily
 
 plugins {
   id 'base'
+  id 'test-report-aggregation'
   alias libs.plugins.axionRelease
   alias libs.plugins.fileEncrypt apply false
 }
@@ -116,6 +117,34 @@ gradle.projectsEvaluated {
 
   uiAppTests.forEach { group ->
     group.configureEach { it.mustRunAfter(unitTests, integrationTests, uiComponentTests) }
+  }
+}
+
+dependencies {
+  subprojects.forEach { subproject ->
+    if (subproject.path.startsWith(':ui')) return
+      subproject.pluginManager.withPlugin('java') {
+        // Aggregate unit test results spread over different projects
+        if (subproject.path != ':test') {
+          testReportAggregation project(subproject.path)
+        }
+      }
+  }
+}
+
+reporting {
+  reports {
+    // Task which generates an aggregated unit test report
+    unitTestReport(AggregateTestReport) {
+      testSuiteName = 'test'
+    }
+  }
+}
+
+tasks.named('unitTestReport').configure {
+  doLast {
+    def htmlIndex = new File(destinationDirectory.get().asFile, "index.html")
+    println "Aggregated Unit Test Results: file://${htmlIndex.absolutePath}"
   }
 }
 

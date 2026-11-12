@@ -99,6 +99,9 @@ Use `./gradlew clean assemble` for a clean artifact build, or `./gradlew clean b
 `assemble` does not prepare the deployment or build Docker images.
 `installDist` prepares the Docker build context in `deployment/build/` without running verification.
 
+Run `./gradlew testBackendUnit unitTestReport` to run backend unit tests and generate a combined HTML report at `build/reports/tests/test/aggregated-results/index.html`.
+The report excludes integration tests and UI tests.
+
 Before running backend integration tests, start PostgreSQL and Keycloak:
 
 ```sh
