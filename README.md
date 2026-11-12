@@ -101,6 +101,7 @@ Use `./gradlew clean assemble` for a clean artifact build, or `./gradlew clean b
 
 Run `./gradlew testBackendUnit unitTestReport` to run backend unit tests and generate a combined HTML report at `build/reports/tests/test/aggregated-results/index.html`.
 The report excludes integration tests and UI tests.
+Shared test groups, unit test reporting, and integration test configuration are defined in `testing.gradle`.
 
 Before running backend integration tests, start PostgreSQL and Keycloak:
 
@@ -108,11 +109,17 @@ Before running backend integration tests, start PostgreSQL and Keycloak:
 docker compose -f profile/dev-testing.yml -p openremote up -d --no-build
 ```
 
+Gradle waits up to 30 seconds for PostgreSQL and Keycloak before backend integration tests, including direct `:test:test` runs.
+If either service is unavailable, the build fails before test preparation and reports the startup command above.
+Backend unit tests and the template's UI component tests do not require these services.
+
 UI tests are included when their module registers an `npmTest` task.
 The template's component test scripts are placeholders; app tests must be added by the custom project.
 UI component test tasks prepare generated TypeScript sources automatically, and UI app test tasks prepare the deployment.
 Pass `-PreuseUiTestArtifacts=true` only when the required build outputs already exist, such as after downloading CI artifacts.
 Individual UI test tasks accept `-Pargs` for test runner options, for example `-Pargs="--shard=1/4"` for Playwright.
+When an app test requires local PostgreSQL and Keycloak, add `dependsOn rootProject.tasks.named('verifyTestServices')` to its `npmTest` task.
+Declare browser installation and availability checks on tasks that use a browser test runner.
 
 ### Docker Compose files
 

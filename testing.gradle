@@ -1,0 +1,161 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+tasks.register('testBackendUnit') {
+  group = 'verification'
+  description = 'Runs backend unit tests'
+}
+
+tasks.register('testBackendIntegration') {
+  group = 'verification'
+  description = 'Runs backend integration tests'
+}
+
+tasks.register('testBackend') {
+  group = 'verification'
+  description = 'Runs backend unit tests followed by backend integration tests'
+  dependsOn tasks.named('testBackendUnit'), tasks.named('testBackendIntegration')
+}
+
+tasks.register('testUiComponent') {
+  group = 'verification'
+  description = 'Runs UI component tests'
+}
+
+tasks.register('testUiApp') {
+  group = 'verification'
+  description = 'Runs UI app end-to-end tests'
+}
+
+tasks.register('testUi') {
+  group = 'verification'
+  description = 'Runs UI component tests followed by UI app end-to-end tests'
+  dependsOn tasks.named('testUiComponent'), tasks.named('testUiApp')
+}
+
+tasks.register('test') {
+  group = 'verification'
+  description = 'Runs testBackend followed by testUi for all backend and UI tests'
+  dependsOn tasks.named('testBackend'), tasks.named('testUi')
+}
+
+def verifyTestServices = tasks.register('verifyTestServices', VerifyTestServices) {
+  group = 'verification'
+  description = 'Waits for PostgreSQL and Keycloak before service-backed tests'
+}
+
+// Ordering does not schedule the check for tasks that do not depend on it.
+allprojects {
+  tasks.configureEach { task ->
+    if (task.path != ':verifyTestServices') {
+      task.mustRunAfter verifyTestServices
+    }
+  }
+}
+
+gradle.projectsEvaluated {
+  def unitTests = subprojects.findAll { it.path != ':test' && !it.path.startsWith(':ui') }
+  .collect { it.tasks.matching { t -> t.name == 'test' } }
+
+  def integrationTests = subprojects.findAll { it.path == ':test' }
+  .collect { it.tasks.matching { t -> t.name == 'test' } }
+
+  def uiComponentTests = subprojects.findAll { it.path.startsWith(':ui:component') }
+  .collect { it.tasks.matching { t -> t.name == 'npmTest' } }
+
+  def uiAppTests = subprojects.findAll { it.path.startsWith(':ui:app') }
+  .collect { it.tasks.matching { t -> t.name == 'npmTest' } }
+
+  tasks.named('testBackendUnit').configure {
+    dependsOn unitTests
+  }
+
+  tasks.named('testBackendIntegration').configure {
+    dependsOn integrationTests
+  }
+
+  tasks.named('testUiComponent').configure {
+    dependsOn uiComponentTests
+  }
+
+  tasks.named('testUiApp').configure {
+    dependsOn uiAppTests
+  }
+
+  // Order test execution without making standalone UI test commands run backend tests.
+  integrationTests.forEach { group ->
+    group.configureEach { it.mustRunAfter(unitTests) }
+  }
+
+  uiComponentTests.forEach { group ->
+    group.configureEach { it.mustRunAfter(unitTests, integrationTests) }
+  }
+
+  uiAppTests.forEach { group ->
+    group.configureEach { it.mustRunAfter(unitTests, integrationTests, uiComponentTests) }
+  }
+}
+
+dependencies {
+  subprojects.forEach { subproject ->
+    if (subproject.path.startsWith(':ui')) return
+      subproject.pluginManager.withPlugin('java') {
+        // Aggregate unit test results spread over different projects
+        if (subproject.path != ':test') {
+          testReportAggregation project(subproject.path)
+        }
+      }
+  }
+}
+
+reporting {
+  reports {
+    // Task which generates an aggregated unit test report
+    unitTestReport(AggregateTestReport) {
+      testSuiteName = 'test'
+    }
+  }
+}
+
+tasks.named('unitTestReport').configure {
+  doLast {
+    def htmlIndex = new File(destinationDirectory.get().asFile, "index.html")
+    println "Aggregated Unit Test Results: file://${htmlIndex.absolutePath}"
+  }
+}
+
+project(':test') {
+  tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    addTestListener(new TestSummaryListener())
+
+    testLogging {
+      // set options for log level LIFECYCLE
+      events = [TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED]
+      exceptionFormat = TestExceptionFormat.FULL
+      showExceptions = true
+      showCauses = true
+      showStackTraces = true
+
+      // set options for log level DEBUG and INFO
+      debug {
+        events = [
+          TestLogEvent.STARTED,
+          TestLogEvent.FAILED,
+          TestLogEvent.PASSED,
+          TestLogEvent.SKIPPED,
+          TestLogEvent.STANDARD_ERROR
+        ]
+        exceptionFormat = TestExceptionFormat.FULL
+      }
+      info.events = debug.events
+      info.exceptionFormat = debug.exceptionFormat
+    }
+  }
+
+  afterEvaluate {
+    tasks.withType(Test).configureEach {
+      workingDir = rootProject.projectDir
+    }
+  }
+}
