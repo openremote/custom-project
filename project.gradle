@@ -167,9 +167,15 @@ subprojects {
 // Default repositories for dependency resolution
 repositories {
   mavenLocal()
-  // Needs to be above central due to org.geotools:gt-main issues
+  // Needs to be above central due to org.geotools:gt-main issues. Restricted to GeoTools and its osgeo-only deps so that
+  // an osgeo outage (timeout/5xx aborts resolution instead of falling through) only affects those.
   maven {
     url = "https://repo.osgeo.org/repository/release/"
+    content {
+      includeGroup "it.geosolutions.jgridshift"
+      includeGroup "org.eclipse.imagen"
+      includeGroupByRegex "org\\.geotools.*"
+    }
   }
   mavenCentral()
   maven {
@@ -183,6 +189,9 @@ repositories {
   }
   maven {
     url = 'https://jitpack.io'
+  }
+  maven {
+    url = 'https://plugins.gradle.org/m2'
   }
 }
 
