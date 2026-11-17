@@ -15,7 +15,7 @@ on:
 jobs:
   call-main-repo:
     name: CI/CD
-    uses: openremote/core/.github/workflows/custom-staging.yml@1.33.0
+    uses: openremote/core/.github/workflows/custom-staging.yml@9f9cf8ddcdf92d6b3d8553ee689a014a5988ca1e # 1.33.0
     with:
       INPUTS: ${{ toJSON(github.event.inputs) }}
     secrets: inherit
