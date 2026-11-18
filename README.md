@@ -76,6 +76,51 @@ Follow the initial guides on the OpenRemote documentation on [preparing the envi
 
 _(Please describe the steps necessary to run this custom project locally.)_
 
+### Building and testing
+
+Use JDK 21 and the Yarn version configured in `package.json`.
+The project uses the same lifecycle and targeted test tasks as OpenRemote Core:
+
+```sh
+./gradlew assemble                  # Build backend JARs and UI bundles
+./gradlew check                     # Run tests and Spotless checks
+./gradlew build                     # Build and verify the project
+./gradlew installDist               # Prepare the deployment Docker build context
+./gradlew test                      # Run backend tests followed by UI tests
+./gradlew testBackend               # Run backend unit tests followed by integration tests
+./gradlew testBackendUnit           # Run backend unit tests only
+./gradlew testBackendIntegration    # Run backend integration tests only
+./gradlew testUi                    # Run UI component tests followed by app tests
+./gradlew testUiComponent           # Run registered UI component tests only
+./gradlew testUiApp                 # Run registered UI app tests only
+```
+
+Use `./gradlew clean assemble` for a clean artifact build, or `./gradlew clean build` to include verification.
+`assemble` does not prepare the deployment or build Docker images.
+`installDist` prepares the Docker build context in `deployment/build/` without running verification.
+
+Run `./gradlew testBackendUnit unitTestReport` to run backend unit tests and generate a combined HTML report at `build/reports/tests/test/aggregated-results/index.html`.
+The report excludes integration tests and UI tests.
+Shared test groups, unit test reporting, and integration test configuration are defined in `testing.gradle`.
+
+Before running backend integration tests, start PostgreSQL and Keycloak:
+
+```sh
+docker compose -f profile/dev-testing.yml -p openremote up -d --no-build
+```
+
+Gradle waits up to 30 seconds for PostgreSQL and Keycloak before backend integration tests, including direct `:test:test` runs.
+If either service is unavailable, the build fails before test preparation and reports the startup command above.
+Backend unit tests and the template's UI component tests do not require these services.
+
+UI tests are included when their module registers an `npmTest` task.
+The template's component test scripts are placeholders; app tests must be added by the custom project.
+UI component test tasks prepare generated TypeScript sources automatically, and UI app test tasks prepare the deployment.
+Pass `-PreuseUiTestArtifacts=true` only when the required build outputs already exist, such as after downloading CI artifacts.
+Individual UI test tasks accept `-Pargs` for test runner options, for example `-Pargs="--shard=1/4"` for Playwright.
+When an app test requires local PostgreSQL and Keycloak, add `dependsOn rootProject.tasks.named('verifyTestServices')` to its `npmTest` task.
+Declare browser installation and availability checks on tasks that use a browser test runner.
+
 ### Docker Compose files
 
 In the `profile` directory you can find different Docker Compose files, each serving a different purpose. To be able to use them, you'll need to download a copy of the `deploy.yml` file from the main OpenRemote repository and place it in the `openremote/profile` directory, to ensure you always have the latest version of the file:

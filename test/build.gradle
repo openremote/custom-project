@@ -1,6 +1,3 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
 plugins {
   id 'java-library'
   id 'groovy'
@@ -16,32 +13,8 @@ dependencies {
 
 tasks.withType(Test).configureEach {
   environment("LOGGING_CONFIG_FILE", "test/src/logging-test.properties")
-  addTestListener(new TestSummaryListener())
 }
 
-test {
-  workingDir = findProject(":openremote") != null ? project(":openremote").projectDir : rootProject.projectDir
-  useJUnitPlatform()
-  testLogging {
-    // set options for log level LIFECYCLE
-    events = [TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED]
-    exceptionFormat = TestExceptionFormat.FULL
-    showExceptions = true
-    showCauses = true
-    showStackTraces = true
-
-    // set options for log level DEBUG and INFO
-    debug {
-      events = [
-        TestLogEvent.STARTED,
-        TestLogEvent.FAILED,
-        TestLogEvent.PASSED,
-        TestLogEvent.SKIPPED,
-        TestLogEvent.STANDARD_ERROR
-      ]
-      exceptionFormat = TestExceptionFormat.FULL
-    }
-    info.events = debug.events
-    info.exceptionFormat = debug.exceptionFormat
-  }
+tasks.named('test') {
+  dependsOn rootProject.tasks.named('verifyTestServices')
 }

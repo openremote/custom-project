@@ -4,6 +4,8 @@ import static org.apache.tools.ant.taskdefs.condition.Os.FAMILY_WINDOWS
 import static org.apache.tools.ant.taskdefs.condition.Os.isFamily
 
 plugins {
+  id 'base'
+  id 'test-report-aggregation'
   alias libs.plugins.axionRelease
   alias libs.plugins.fileEncrypt apply false
 }
@@ -24,6 +26,19 @@ scmVersion {
 allprojects {
   // Apply common project setup
   apply from: "${rootDir}/project.gradle"
+}
+
+// build combines assemble (backend and UI artifacts) and check (tests and Spotless).
+// installDist prepares the deployment without running verification.
+apply from: "${rootDir}/testing.gradle"
+
+tasks.named('assemble') {
+  dependsOn subprojects.collect { it.tasks.matching { t -> t.name == 'assemble' } }
+}
+
+tasks.named('check') {
+  dependsOn tasks.named('test')
+  dependsOn subprojects.collect { it.tasks.matching { t -> t.name == 'check' } }
 }
 
 // Uncomment the following to configure files to be encrypted/decrypted
